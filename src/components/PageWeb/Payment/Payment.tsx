@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../Navbar/Navbar';
 import "./Payment.css"
 
@@ -47,6 +48,9 @@ type BillProduct = {
 
 
 export default function Payment() {
+
+  const navigate = useNavigate();
+
   const { user, setUser } = useAppContext();
   const [carts, setCarts] = useState<CartProduct[]>([]);
   // const [billId, setBillId] = useState(0);
@@ -137,6 +141,7 @@ export default function Payment() {
       AddBillProduct(id,carts[i].product_id, carts[i].quatity, carts[i].quatity*carts[i].product.price)
     }
     DeleteAllCartByClientId();
+    navigate("payDone")
     alert("Thanh toan thanh cong")
   }
 

@@ -170,7 +170,7 @@ export default () => {
               element={<RevenueOverTime />}
             />
             <Route path="/payment" element={<Payment />} />
-            <Route path="/payDone" element={<PayDone />} />
+            <Route path="/payment/payDone" element={<PayDone />} />
             <Route path="/user" element={<User />} />
           </Routes>
         </div>
