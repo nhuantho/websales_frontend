@@ -18,19 +18,23 @@
 }
 #bodySection .bodyContainer {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1286px;
     padding: 40px;
 }
 
 #bodySection .bodyText {
+    width: 100%;
     font-family: 'Playfair Display', serif;
     margin-bottom: 0;
     font-size: 46px;
-    text-align: start;
+    text-align: center;
     font-weight: bold;
-    padding: 10px 50px 10px 10px;
     color: #fff;
-    background-color: #002c3e;
+}
+
+#bodySection .bodyText span{
+    padding: 10px 50px 10px 10px;
+    background-color: #000;
     clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0 100%, 0 50%, 0 0);
 }
 
@@ -73,18 +77,18 @@
     width: 100%;
 }
 #footerSection .footerContainer {
-    max-width: 1200px;
+    max-width: 1286px;
     margin-right: auto;
     margin-left: auto;
     padding: 0 20px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 20px;
 }
 
 #footerSection .footerContact {
     text-align: left;
-    padding: 70px 0;
-    width: 33.33%;
+    padding: 40px 0;
     color: #fff;
 }
 
@@ -130,7 +134,7 @@
 
 #footerSection .footerInfo {
     color: #fff;
-    padding-bottom: 70px;
+    padding-bottom: 10px;
 }
 
 #footerSection .footerLine {
