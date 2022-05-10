@@ -1,54 +1,57 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../../Navbar/Navbar';
 import "./Payment.css"
 
-const Cart = {
-  "id": 1,
-  "client_id": 2,
-  "user": {
-      "id": 2,
-      "fullname": "Bùi Cảnh Nhuận",
-      "dob": "20/07/2001",
-      "gender": "Nam",
-      "phone": "0329689087",
-      "address": "Phú Thọ",
-      "username": "nhuan1",
-      "password": "12345",
-      "isAdmin": 0,
-      "note": ""
+
+type CartProduct = {
+  id: number,
+  client_id: number,
+  user : {
+    id: number,
+    fullname: string,
+    dob: string,
+    gender: string,
+    phone: string,
+    address: string,
+    username: string,
+    password: string,
+    isAdmin: number,
+    note: string,
+
   },
-  "product_id": 10,
-  "product": {
-      "id": 10,
-      "nameProduct": "Áo thun đen có hình",
-      "model": "Áo",
-      "image": "https://firebasestorage.googleapis.com/v0/b/test-62604.appspot.com/o/img10.jpg?alt=media&token=5ed15472-a5c4-402e-b0a7-ee38f0351fc2",
-      "price": 200000,
-      "describes": "Chất liệu vải mềm, mặc thoải mái",
-      "color": "Trắng"
-  },
-  "size_id": 3,
-  "size": {
-    "id": 3,
-    "size": "L"
-  },
-  "extraDate": "5/5/2022",
-  "quatity": 2
+  product_id : number,
+  product : {
+    id: number,
+    nameProduct:string,
+    model:string,
+    image:string,
+    price: number,
+    describes:string,
+    color:string,    
+  }
+  size_id : number,
+  size: {
+    id: number,
+    size: string
+  }
+  extraDate : String,
+  quatity : number,
 }
 
 type BillProduct = {
   product_id: number;
   quatity: number;
-  unitPrice: number
+  unitPrice: number;
 }
+
 
 export default function Payment() {
   const { user, setUser } = useAppContext();
-  const [carts, setCarts] = useState([Cart])
-  const [billProduct, setBillProduct] = useState<BillProduct[]>([])
+  const [carts, setCarts] = useState<CartProduct[]>([]);
+  // const [billId, setBillId] = useState(0);
+
   const [infoPayment, setInfoPayment] = useState("online"); 
-  const [idB, setIdB] = useState(0);
   const checkInfoPayment = (data: string) => {
     if(infoPayment == data) 
       return 'red'
@@ -59,11 +62,14 @@ export default function Payment() {
   // date time
   var showDate = new Date();
   var date = showDate.getDate()+"/"+(showDate.getMonth()+1)+"/"+showDate.getFullYear();
-  console.log(date);
-  
   var dateTime = showDate.getHours()+":"+showDate.getMinutes()+":"+showDate.getSeconds(); 
 
-  //
+  // Tính tổng tiền
+  var Total = 0;
+  for( let i = 0; i < carts.length; i++){
+    Total += carts[i].product.price * carts[i].quatity
+  }
+  //=================================================================
   const [modalBank, setModaBank] = useState(true)
   const [bank,setBank] = useState("VCB")
   const listBank = ["VCB","AGRI","VPBANK","OceanBank","Techcombank","MB","NCB"]
@@ -74,99 +80,76 @@ export default function Payment() {
     else return "white"
   }
 
-  const AddBill = () => {
-    axios({
-      method: "post",
-      url: `http://localhost:9191/addBill`,
-      data: {
-        "client_id": user.id,
-        "datePayment": date,
-        "infoPayment": infoPayment
-      },
-    })
-      .then((res) => {
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  //===============================================================
+  // lấy thông tin sản phẩm có trong cart
+  useEffect(() => {
+    getAPI();
+  }, []);
 
-  const GetBill = () => {
-    axios({
-      method: "get",
-      url: `http://localhost:9191/bills`,
-      data: null
-    })
-      .then((res) => {
-        setIdB(res.data[res.data.length-1].id);
-        console.log(idB);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  const AddBillProduct = () => {
-    axios({
-      method: "post",
-      url: `http://localhost:9191/addBill`,
-      data: {
-        billProduct
-      },
-    })
-      .then((res) => {
-        console.log("AddBillProduct");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  const GetCart = () => {
+  const getAPI = () => {
     axios({
       method: "get",
       url: "http://localhost:9191/cartByClientId/"+user.id,
       data: null,
     })
       .then((res) => {
-        setCarts(res.data)
-        console.log(carts);
-        console.log("GetCart");
-        console.log(res.data);
-        
+        setCarts(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  //==================================================================
 
-  const DeleteCart = () => {
+  const AddBill = () => {
     axios({
-      method: "delete",
-      url: `http://localhost:9191/deleteAllCart`,
-      data: null
+      method: "post",
+      url: `http://localhost:9191/addBill`,
+      data: {
+        "client_id": user.id,
+        "datePayment": showDate.getHours()+":"+showDate.getMinutes()+":"+showDate.getSeconds() + " " + showDate.getDate()+"/"+(showDate.getMonth()+1)+"/"+showDate.getFullYear(),
+        "infoPayment": infoPayment
+      },
     })
       .then((res) => {
-        console.log("Delete Cart");
+        AddManyBillProduct(res.data.id)       
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {console.log(err);});
   }
 
-  const ArrayBillProduct = () => {
-    let abp = [] as BillProduct[]
-    let bp = {} as BillProduct
-    carts.forEach((cart) => {
-      bp = {
-        product_id:cart.product_id, quatity : cart.quatity, unitPrice : cart.product.price*cart.quatity
-      }
-      abp.push(bp)
+  const AddBillProduct = (billId: number, product_id: number, quatity: number, unitPrice:number) => {
+    axios({
+      method: "post",
+      url: `http://localhost:9191/addBillProduct`,
+      data: {
+        "bill_id": billId,
+        "product_id":product_id,
+        "quatity": quatity,
+        "unitPrice" : unitPrice
+      },
     })
-    setBillProduct(abp)
+      .then((res) => {})
+      .catch((err) => {console.log(err);});
   }
 
-  const AddToBill = () => {
-    AddBill();
+  const AddManyBillProduct = (id : number) => {
+    for(let i=0; i < carts.length; i++ ){
+      AddBillProduct(id,carts[i].product_id, carts[i].quatity, carts[i].quatity*carts[i].product.price)
+    }
+    DeleteAllCartByClientId();
+    alert("Thanh toan thanh cong")
+  }
+
+  //==================================================================
+  
+  const  DeleteAllCartByClientId = () => {
+    axios({
+      method: "delete",
+      url: `http://localhost:9191/deleteAllCart/` + user.id,
+      data: null,
+    })
+      .then((res) => {})
+      .catch((err) => {console.log(err);});
   }
 
   return (
@@ -179,6 +162,13 @@ export default function Payment() {
         .................
         .................
       </p>
+      <div>
+        {
+          carts.map((cart) => (
+            <ProductInCart  cart={cart}/>
+          ))
+        }
+      </div>
       <button style={{backgroundColor: checkInfoPayment("online") }}
         onClick = {() => {setInfoPayment("online"); setModaBank(!modalBank)}}
       >
@@ -213,8 +203,29 @@ export default function Payment() {
         <span>Thời gian</span> {dateTime + " " + date}
       </div>
       
-      <button onClick={() => (AddToBill())}>Thanh toán</button>
+      <button onClick={() => (AddBill())}>Thanh toán</button>
 
     </div>
   )
 }
+
+type props = {
+  cart : CartProduct
+}
+
+// hien thong tin san pham trong hooa don
+const ProductInCart = ({cart} : props) => (
+  <div>
+    <img src={cart.product.image} className="cartImage"/>
+    <span>{cart.product.nameProduct}</span>
+    <span>{cart.product.model}</span>
+    <span>{cart.product.price}</span>
+    <span>{cart.product.color}</span>
+  </div>
+)
+// {
+//   "bill_id":1,
+//   "product_id":60,
+//   "quatity": 1,
+//   "unitPrice" : 1
+// }

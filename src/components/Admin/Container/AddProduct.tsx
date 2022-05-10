@@ -185,7 +185,7 @@ export default  ({reload} : props) =>  {
                     <button 
                         style={{backgroundColor : checkSize(size.id)}}
                         onClick={() => setSelectSize(Number(size.id))}
-                    >{size.id+""}</button>
+                    >{size.size+""}</button>
                 ))
             }
             <button onClick={() => addProductSize()}>Hoàn Thành</button>

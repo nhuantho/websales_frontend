@@ -84,6 +84,7 @@ export default () => {
                 {
                     billProduct.map((bill) => (
                         <tr>
+                            
                             <td>{bill.id}</td>
                             <td>{bill.product.nameProduct}</td>
                             <td>{bill.bill.datePayment}</td>
@@ -92,6 +93,9 @@ export default () => {
                             <td>{bill.product.color}</td>
                             <td>{bill.quatity}</td>
                             <td>{bill.unitPrice}</td>
+                            <td>
+                                <img src={bill.product.image} />
+                            </td>
                         </tr>
                     ))
                 }
