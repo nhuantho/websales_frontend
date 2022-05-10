@@ -9,6 +9,5 @@ td,tr{
 }
 
 tr:hover {
-    border:1px solid blue;
-    background-color: aqua;
+    background-color: rgba(0, 0, 0, .1);
 }

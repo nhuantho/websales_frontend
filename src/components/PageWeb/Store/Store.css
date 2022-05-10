@@ -68,14 +68,15 @@
 
 /* footer */
 #footerSection {
+    padding-top: 20px;
     background-color: #002c3e;
     width: 100%;
 }
 #footerSection .footerContainer {
-    width: 80%;
+    max-width: 1200px;
     margin-right: auto;
     margin-left: auto;
-    padding: 15px;
+    padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
 }

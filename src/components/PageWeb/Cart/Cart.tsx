@@ -100,11 +100,11 @@ export default () => {
                 <thead>
                   <tr>
                     
-                    <th className="text-center py-3 px-4" style={{width: "400px"}}>Tên sản phẩm &amp; Chi tiết</th>
-                    <th className="text-right py-3 px-4" style={{width: "100px"}}>Đơn giá</th>
+                    <th className="text-center py-3 px-4">Tên sản phẩm &amp; Chi tiết</th>
+                    <th className="text-right py-3 px-4">Đơn giá</th>
                     <th className="text-center py-3 px-4" style={{width: "120px"}}>Số lượng</th>
-                    <th className="text-right py-3 px-4" style={{width: "100px"}}>Tổng giá</th>
-                    <th className="text-center align-middle py-3 px-0" style={{width: "40px"}}><a href="#" className="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i className="ino ion-md-trash"></i></a></th>
+                    <th className="text-right py-3 px-4">Tổng giá</th>
+                    <th className="text-center align-middle py-3 px-0" style={{width: "80px"}}><a href="#" className="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i className="ino ion-md-trash"></i></a></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,9 +126,9 @@ export default () => {
                           </div>
                         </td>
                         <td className="text-right font-weight-semibold align-middle p-4">{cart.product.price}Đ</td>
-                        <td className="align-middle p-4"><input type="text" className="form-control text-center" value={cart.quatity}></input></td>
+                        <td className="align-middle p-4"><input type="number" className="form-control text-center" value={cart.quatity}></input></td>
                         <td className="text-right font-weight-semibold align-middle p-4">{cart.product.price * cart.quatity}Đ</td>
-                        <td className="text-center align-middle px-0"><a className="shop-tooltip close float-none text-danger" title="" data-original-title="Remove" onClick={() => (setIdC(cart.id), DeleteCart())}>×</a></td>
+                        <td className="text-center align-middle px-0"><a className="btn-remove shop-tooltip close float-none text-danger" title="" data-original-title="Remove" onClick={() => (setIdC(cart.id), DeleteCart())}>×</a></td>
                       </tr>
                     )
                   }
@@ -143,10 +143,10 @@ export default () => {
                 <label className="text-muted font-weight-normal">Promocode</label>
                 <input type="text" placeholder="ABC" className="form-control"></input>
               </div>
-              <div className="d-flex">
+              <div className="d-flex total-payment">
                 <div className="text-right mt-4 mr-8">
                   <label className="text-muted font-weight-normal m-0">Giảm giá</label>
-                  <div className="text-large"><strong>$20</strong></div><br></br>
+                  <div className="text-large"><strong>20000Đ</strong></div><br></br>
                 </div>
                 <div className="text-right mt-4">
                   <label className="text-muted font-weight-normal m-0">Tổng giá</label>
@@ -156,8 +156,8 @@ export default () => {
             </div>
         
         
-            <div className="float-right">
-              <button type="button" className="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onClick={() => navigate("/product")}>Tiếp tục shopping</button>
+            <div className="float-right total-payment-btn">
+              <button type="button" className="btn btn-lg btn-default md-btn-flat mt-2 mr-3 btn-color-yellow" onClick={() => navigate("/product")}>Tiếp tục shopping</button>
               <button type="button" className="btn btn-lg btn-primary mt-2" onClick={() => navigate("/payment")}>Thanh toán</button>
             </div>
         
