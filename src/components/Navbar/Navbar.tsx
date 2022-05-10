@@ -27,6 +27,7 @@ import User from "../User/User";
 import Bill from "../PageWeb/Bill/Bill";
 import "./Navbar.css";
 import Payment from "../PageWeb/Payment/Payment";
+import PayDone from "../PageWeb/Payment/PayDone";
 
 type user = {
   id: number;
@@ -169,6 +170,7 @@ export default () => {
               element={<RevenueOverTime />}
             />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/payment/payDone" element={<PayDone />} />
             <Route path="/user" element={<User />} />
           </Routes>
         </div>
