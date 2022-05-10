@@ -1,3 +1,11 @@
 #body {
     margin-top: 200px;
 }
+
+.cartImage {
+    width: 40px !important;
+    height: auto;
+}
+span {
+    margin: 0 10px;
+}
