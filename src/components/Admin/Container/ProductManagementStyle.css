@@ -1,0 +1,13 @@
+table, th, td{
+    border:1px solid #ccc;
+}
+table{
+    border-collapse:collapse;
+}
+/* tr:hover{
+    background-color: black;
+    cursor:pointer;
+} */
+input {
+    /* border: none; */
+}

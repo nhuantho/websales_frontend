@@ -1,0 +1,14 @@
+table, th {
+    border:1px solid black;
+    padding: 12px;
+}
+
+td,tr{
+    border:1px solid #ccc;
+    padding: 12px;
+}
+
+tr:hover {
+    border:1px solid blue;
+    background-color: aqua;
+}

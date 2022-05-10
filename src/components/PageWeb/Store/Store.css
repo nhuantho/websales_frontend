@@ -1,0 +1,144 @@
+/* header */
+#headerSection .storeName {
+    background: #f7444e;
+    text-align: center;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 40px;
+    line-height: 1.2;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+/* body */
+#bodySection {
+    margin-top: 56px;
+    padding: 40px 0;
+    width: 100%;
+}
+#bodySection .bodyContainer {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 40px;
+}
+
+#bodySection .bodyText {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0;
+    font-size: 46px;
+    text-align: start;
+    font-weight: bold;
+    padding: 10px 50px 10px 10px;
+    color: #fff;
+    background-color: #002c3e;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0 100%, 0 50%, 0 0);
+}
+
+#bodySection .rowDescribe {
+    /* chia đều */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#bodySection .colDescribe {
+    margin-top: 45px;
+    flex: 1 1 300px;
+} 
+
+#bodySection .colBox {
+    background-color: #002c3e;
+    border-radius: 5px;
+    padding: 45px 50px;
+}
+
+#bodySection .h3_colDescribe {
+    color: #fff;
+    font-size : 21;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+#bodySection .p_colDescribe {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 8px;
+}
+
+/* footer */
+#footerSection {
+    background-color: #002c3e;
+    width: 100%;
+}
+#footerSection .footerContainer {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#footerSection .footerContact {
+    text-align: left;
+    padding: 70px 0;
+    width: 33.33%;
+    color: #fff;
+}
+
+#footerSection .footerTitle {
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    text-align: left;
+    color: #fff;
+}
+
+#footerSection .contactContent{
+    display: flex;
+    flex-direction: column;
+    line-height: 2;
+}
+#footerSection .contactText{
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#footerSection .contactText:hover{
+    color: #f7444e;
+}
+
+#footerSection .contactSpan {
+    margin-left: 10px;
+}
+#footerSection .boxIcon {
+    display: flex;
+    flex-wrap: wrap;
+}
+#footerSection .footerIcon {
+    margin-right: 10px;
+}
+
+#footerSection .footerIcon:hover {
+   opacity: 0.8;
+}
+
+#footerSection .footerInfo {
+    color: #fff;
+    padding-bottom: 70px;
+}
+
+#footerSection .footerLine {
+    border-top-width: 5px;
+    border-top-color: #fff;
+    width: 80%;
+    height: 1px;
+}
+/* #footerSection .footerDetail {
+    color: #fff;
+    width: 33.33%;
+} */
