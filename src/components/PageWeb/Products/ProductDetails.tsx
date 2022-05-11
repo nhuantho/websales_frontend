@@ -57,6 +57,8 @@ export default function ProductDetails() {
   console.log(idP);
   console.log(idS);
   console.log(q);
+
+  
   
   useEffect(() => {
     getAPI();
@@ -120,8 +122,11 @@ export default function ProductDetails() {
     return s;
   }
 // =====================================
+  let SumQuantity = 0;
+  productSize.forEach(ps => {SumQuantity += ps.quantity})
+
   const checkQuantity = () => {
-    if(quantity >= productSize[0].quantity)
+    if(quantity >= q)
     {
       alert("Quá số lượng trong kho")
       setQuantity(0);
@@ -130,9 +135,11 @@ export default function ProductDetails() {
 
   //
   const check_kho = () => {
-    if (productSize[0].quantity <= 0)
+    if (SumQuantity <= 0)
       return("Hết hàng")
-    return productSize[0].quantity;
+    if (q !=0 ) 
+      return q;
+      return "Còn Hàng";
   }
   return (
     <>
