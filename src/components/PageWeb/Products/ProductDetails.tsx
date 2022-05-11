@@ -119,7 +119,21 @@ export default function ProductDetails() {
     }
     return s;
   }
+// =====================================
+  const checkQuantity = () => {
+    if(quantity >= productSize[0].quantity)
+    {
+      alert("Quá số lượng trong kho")
+      setQuantity(0);
+    } else setQuantity(quantity+1);
+  }
 
+  //
+  const check_kho = () => {
+    if (productSize[0].quantity <= 0)
+      return("Hết hàng")
+    return productSize[0].quantity;
+  }
   return (
     <>
     <div>
@@ -155,11 +169,10 @@ export default function ProductDetails() {
             <div className="describeProduct">
               <p>{productSize[0].product.describes}</p>
             </div>
-
-            {/* <div className="colorProduct">
-              <span>Color:</span>
-              <div className="color">{productSize.length > 0 ?productSize[0].product.color:""}</div>
-            </div> */}
+            <div className="describeProduct">
+              <p>Kho hàng: {check_kho()}</p>
+            </div>
+           
 
             <div className="sizeProduct">
               <span>Size:</span>
@@ -168,13 +181,7 @@ export default function ProductDetails() {
                   <button className="size" onClick={() => (setIdS(ps.size_id), setQ(ps.quantity))}>{ps.size.size}</button>
                 );
               })}
-              {/* <button className="size">37</button>
-              <button className="size">38</button>
-              <button className="size">39</button>
-              <button className="size">40</button>
-              <button className="size">41</button>
-              <button className="size">42</button>
-              <button className="size">43</button> */}
+        
             </div>
 
             <div className="quantityProduct">
@@ -188,7 +195,7 @@ export default function ProductDetails() {
                 <span className="numberQuantity">{quantity}</span>
                 <button
                   className="btQuantity"
-                  onClick={() => (quantity >= 0 ?setQuantity(quantity + 1):setQuantity(0))}
+                  onClick={() => checkQuantity( )}
                 >
                   +
                 </button>

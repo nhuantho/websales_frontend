@@ -142,6 +142,7 @@ export default function Payment() {
     }
     DeleteAllCartByClientId();
     navigate("payDone")
+    // giam so luong san pham trong kho
     alert("Thanh toan thanh cong")
   }
 
@@ -228,9 +229,3 @@ const ProductInCart = ({cart} : props) => (
     <span>{cart.product.color}</span>
   </div>
 )
-// {
-//   "bill_id":1,
-//   "product_id":60,
-//   "quatity": 1,
-//   "unitPrice" : 1
-// }
