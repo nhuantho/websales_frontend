@@ -118,7 +118,9 @@ export default () => {
       setProducts(products.sort(compare_increase))
     } 
   }
-
+  // ==================================================
+  // tim kiem
+  const [search, setSearch] = useState("") 
 
   return (
     <>
@@ -128,9 +130,21 @@ export default () => {
 
       {/* body */}
       <div id="bodySection">
-        
         {/* loc theo mau */}
         <div className="btn-filter">
+          {/* search */}
+{/* ================================================= */}
+        <div>
+            <input
+                className="input-signin"
+                type="text"
+                placeholder="Search By Name Product"
+                onChange={(e) => setSearch(e.target.value)}
+            ></input>
+            <button  onClick={() => getAPI("http://localhost:9191/productSreachByNameProduct/"+search)} >Search</button>
+         </div>
+{/* ====================================================== */}
+        
         <div id="headerSection">
         <ul className="headerList">
           <li className="headerItem">
