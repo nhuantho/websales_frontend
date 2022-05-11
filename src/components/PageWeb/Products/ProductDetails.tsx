@@ -53,11 +53,19 @@ export default function ProductDetails() {
   const { idP, setIdP, user, setUser } = useAppContext();
   const [productSize, setProductSize] = useState(test);
   const [idS, setIdS] = useState(0);
-  const [q, setQ] = useState(0);
+  const [q, setQ] = useState(-1);
   console.log(idP);
   console.log(idS);
   console.log(q);
 
+  const [selectSize, setSelectSize] = useState("no_color")
+
+  const check_selectSize = (data : String) => {
+    if(selectSize == data)
+      return "#f6de04"
+    else
+      return "#fff"
+  }
   
   
   useEffect(() => {
@@ -137,9 +145,10 @@ export default function ProductDetails() {
   const check_kho = () => {
     if (SumQuantity <= 0)
       return("Hết hàng")
-    if (q !=0 ) 
-      return q;
-      return "Còn Hàng";
+    if (q == 0) return "Hết size"
+    if (q != -1 ) 
+      return q
+    return "Còn Hàng";
   }
   return (
     <>
@@ -185,7 +194,7 @@ export default function ProductDetails() {
               <span>Size:</span>
               {productSize.map((ps) => {
                 return (
-                  <button className="size" onClick={() => (setIdS(ps.size_id), setQ(ps.quantity))}>{ps.size.size}</button>
+                  <button style={{backgroundColor: check_selectSize(ps.size.size)}} className="size" onClick={() => (setIdS(ps.size_id), setQ(ps.quantity), setSelectSize(ps.size.size))}>{ps.size.size}</button>
                 );
               })}
         
