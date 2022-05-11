@@ -1,26 +1,30 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./Admin.css";
 
 export default () => {
   const navigate = useNavigate();
   return (
-    <div style={{ width: 200, marginTop: 100}}>
+    <div className="admin-page">
+      <div className="admin-header">
+        <h1>Admin Quản lý</h1>
+      </div>
       <ListGroup>
-        <button onClick={() => navigate("productmanagement")}>
+        <button className="btn-admin" onClick={() => navigate("productmanagement")}>
           <ListGroup.Item>Quản lí sản phẩm</ListGroup.Item>
         </button>
-        <button onClick={() => navigate("productsales")}>
+        <button className="btn-admin" onClick={() => navigate("productsales")}>
           <ListGroup.Item variant="primary">
             Thống doanh thu theo loại sản phẩm
           </ListGroup.Item>
         </button>
-        <button onClick={() => navigate("revenuebycustomer")}>
+        <button className="btn-admin" onClick={() => navigate("revenuebycustomer")}>
           <ListGroup.Item variant="secondary">
             Thống kê doanh thu theo khách hàng
           </ListGroup.Item>
         </button>
-        <button onClick={() => navigate("revenueovertime")}>
+        <button className="btn-admin" onClick={() => navigate("revenueovertime")}>
           <ListGroup.Item variant="success">
             Thống kê doanh thu theo thời gian
           </ListGroup.Item>

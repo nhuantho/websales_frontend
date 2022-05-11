@@ -34,14 +34,14 @@ export default ({setUploadImage}) => {
   }, []);
   
   return (
-    <div className="App">
-      <input
+    <div className="upload">
+      <input style={{ width: "100%" }}
         type="file"
         onChange={(event) => {
           setImageUpload(event.target.files[0]);
         }}
       />
-      <button onClick={uploadFile}> Upload Image</button>
+      <button style={{marginTop: "10px", width: "100%"}} className="bttn" onClick={uploadFile}> Upload Image</button>
     </div>
   );
 }
