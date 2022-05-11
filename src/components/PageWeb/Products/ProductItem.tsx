@@ -33,6 +33,19 @@ export default function ProductItem({
     setIdP(id);
   };
 
+  const StylePrice = (price : number) => {
+    let num = price+""
+    let s = "";
+    for( let i = 0; i < num.length; i++)
+    {
+      s = num[num.length -1 - i ] + s;
+
+      if((i+1) % 3 ==0 && i != (num.length-1) ) {
+        s = "." + s;
+      }
+    }
+    return s;
+  }
   return (
     <Button id="item" onClick={togg}>
       <div className="container">
@@ -45,7 +58,7 @@ export default function ProductItem({
           </a>
         </div>
         <div className="price">
-          <div>{price}<span>đ</span></div>
+          <div>{StylePrice(price)}<span>đ</span></div>
         </div>
       </div>
     </Button>

@@ -105,6 +105,20 @@ export default function ProductDetails() {
       else AddToCart()
     }
   }
+  // ==========================================
+  const StylePrice = (price : number) => {
+    let num = price+""
+    let s = "";
+    for( let i = 0; i < num.length; i++)
+    {
+      s = num[num.length -1 - i ] + s;
+
+      if((i+1) % 3 ==0 && i != (num.length-1) ) {
+        s = "." + s;
+      }
+    }
+    return s;
+  }
 
   return (
     <>
@@ -136,7 +150,7 @@ export default function ProductDetails() {
               <span className="rateReviews"></span>
             </div>
 
-            <div className="priceProduct">{productSize.length > 0 ?productSize[0].product.price:""} <span>đ</span> </div>
+            <div className="priceProduct">{productSize.length > 0 ? StylePrice(productSize[0].product.price) :""} <span>đ</span> </div>
 
             <div className="describeProduct">
               <p>{productSize[0].product.describes}</p>

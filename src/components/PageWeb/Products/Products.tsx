@@ -5,6 +5,7 @@ import "./ProductItem";
 import ProductItem from "./ProductItem";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Store/Footer";
+import { Alert } from "react-bootstrap";
 
 
 
@@ -32,7 +33,7 @@ export default () => {
       data: null,
     })
       .then((res) => {
-        setProducts(res.data);
+        SortByPrice(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -87,6 +88,37 @@ export default () => {
         console.log(err);
       });
   }
+  //===================================================
+  const [sortPrice, setSortPrice] = useState("Giá Tăng Dần") 
+  //loc theo gia
+  function compare_increase(a: product, b : product) {
+    let comparison = 0;
+    if(a.price > b.price ) comparison=1;
+    else comparison = -1;
+      return comparison;
+  }
+  function compare_reduce(a: product, b : product) {
+    let comparison = 0;
+    if(a.price > b.price ) comparison=1;
+    else comparison = -1;
+      return -comparison;
+  }
+  const SortByPrice = (data : [product] ) => {
+    data.sort(compare_increase);
+    setProducts(data);
+  }
+
+  const ChangeSortValue = () => {
+    if(sortPrice == "Giá Tăng Dần") {
+      setSortPrice("Giá Giảm Dần");
+      setProducts(products.sort(compare_reduce))
+    } 
+    if(sortPrice == "Giá Giảm Dần") {
+      setSortPrice("Giá Tăng Dần");
+      setProducts(products.sort(compare_increase))
+    } 
+  }
+
 
   return (
     <>
@@ -123,6 +155,11 @@ export default () => {
           </li>
         </ul>
       </div>
+          <button className="btn-filter-color bttn"
+            onClick={() => ChangeSortValue()}
+          > 
+              {sortPrice}
+            </button>
           <button className="btn-filter-color bttn"
             onClick={() => {setModalColor(!(modalColor)); setModalPrice(false)} }
           > 
