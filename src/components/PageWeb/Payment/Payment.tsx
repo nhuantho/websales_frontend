@@ -45,7 +45,44 @@ type BillProduct = {
   quatity: number;
   unitPrice: number;
 }
-
+const productSizeType = {
+  "id": 1,
+  "product_id": 1,
+  "product": {
+      "id": 1,
+      "nameProduct": "Áo thun đỏ đơn giản",
+      "model": "Áo",
+      "image": "https://firebasestorage.googleapis.com/v0/b/test-62604.appspot.com/o/img1.jpg?alt=media&token=00b86012-129f-4885-8033-77655cf76e03",
+      "price": 150000,
+      "describes": "Chất liệu vải cốt tông, mặc thoải mái",
+      "color": "Đỏ"
+  },
+  "size_id": 1,
+  "size": {
+      "id": 1,
+      "size": "S"
+  },
+  "quantity": 10
+}
+type ProductSizes = {
+  id : number,
+  product_id : number,
+  product: {
+    id: number,
+    nameProduct: String,
+    model: String,
+    image: String,
+    price: String,
+    describes: String,
+    color: String,    
+  },
+  size_id: number,
+  size: {
+    id : number,
+    size : String,
+  },
+  quantity: number,
+}
 
 export default function Payment() {
 
@@ -139,10 +176,13 @@ export default function Payment() {
   const AddManyBillProduct = (id : number) => {
     for(let i=0; i < carts.length; i++ ){
       AddBillProduct(id,carts[i].product_id, carts[i].quatity, carts[i].quatity*carts[i].product.price)
+      get_ProductSize(carts[i].product_id, carts[i].size_id, carts[i].quatity);
     }
     DeleteAllCartByClientId();
     navigate("payDone")
     // giam so luong san pham trong kho
+    
+    //==============================
     alert("Thanh toan thanh cong")
   }
 
@@ -156,6 +196,45 @@ export default function Payment() {
     })
       .then((res) => {})
       .catch((err) => {console.log(err);});
+  }
+  // ================================================================
+  // lay ra productSize
+  var productSize_id = 0;
+  var productSize_quantity=0;
+  // product_id + size_id
+  const get_ProductSize = (product_id: number, size_id: number, quantity: number) => {
+    axios({
+      method: "post",
+      url: "http://localhost:9191/productSizeByProductIdAndSizeId",
+      data: {
+        "product_id": product_id,
+        "size_id": size_id
+      }
+    })
+      .then((res) => {
+        update_quantity_ProductSize(res.data.id, res.data.quantity, quantity)
+    })
+      .catch((err) => {
+        console.log(err);
+    });
+  }
+
+  // giam so luong
+  const update_quantity_ProductSize = (id : number, shop_quantity : number, product_quantity: number) => {
+      
+    axios({
+      method: "put",
+      url: "http://localhost:9191/updateProductSize",
+      data: {
+        "id": id,
+        "quantity": (shop_quantity - product_quantity),
+    }
+    })
+      .then((res) => {
+    })
+      .catch((err) => {
+        console.log(err);
+    });
   }
 
   return (
