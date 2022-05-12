@@ -134,14 +134,14 @@ export default () => {
         <div className="btn-filter">
           {/* search */}
 {/* ================================================= */}
-        <div>
+        <div className="search-form">
             <input
-                className="input-signin"
+                className="search-input"
                 type="text"
-                placeholder="Search By Name Product"
+                placeholder="Search Name Product"
                 onChange={(e) => setSearch(e.target.value)}
             ></input>
-            <button  onClick={() => getAPI("http://localhost:9191/productSreachByNameProduct/"+search)} >Search</button>
+            <button className="bttn" onClick={() => getAPI("http://localhost:9191/productSreachByNameProduct/"+search)} >Search</button>
          </div>
 {/* ====================================================== */}
         

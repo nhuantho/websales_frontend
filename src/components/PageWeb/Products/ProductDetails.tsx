@@ -157,7 +157,7 @@ export default function ProductDetails() {
       
 
       {/* body */}
-      <div id="bodySection">
+      <div id="bodySection-p-detail">
         
         <div className="bodyContainer">
           <div className="btn-back">

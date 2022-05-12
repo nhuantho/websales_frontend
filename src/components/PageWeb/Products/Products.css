@@ -58,16 +58,28 @@
 
 .btn-filter{
     margin-top: 20px;
-    position: -webkit-sticky;
-    position: sticky;
+    /* position: -webkit-sticky;
+    position: sticky; */
+    /* top: 76px;
+    z-index: 1; */
     height: 100vh;
-    top: 76px;
-    z-index: 1;
     width: calc(20% - 20px);
     margin-left: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+}
+
+.search-form{
+    display: flex;
+    /* flex-direction: column; */
+    gap: 20px;
+}
+
+.search-input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 10px;
 }
 
 .btn-filter-color,
