@@ -8,9 +8,7 @@ export default () => {
   return (
     <div className="home-container">
       <Slider />
-      <div style={{width: 1520, height: 700}}>
-        <Map/>
-      </div>
+      <Map/>
       <Footer/>
     </div>
   );

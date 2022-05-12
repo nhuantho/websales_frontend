@@ -62,3 +62,9 @@ slide-item{
 .slide-container:hover .carousel-control-next{
     opacity: 1;
 }
+
+.map-container{
+    margin: 40px 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+}
