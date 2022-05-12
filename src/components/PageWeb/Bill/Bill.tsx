@@ -65,44 +65,51 @@ export default () => {
   return (
 
     <div>
-        <h1 style={{ marginTop: 100}}>Bill</h1>
+        <h1 style={{ marginTop: 100}}>Hóa đơn</h1>
+        <div className="table-responsive">
+              <table className="table table-bordered m-0">
+                <thead>
+                  <tr>
+                    
+                    <th className="text-center py-3 px-4">Tên sản phẩm &amp; Chi tiết</th>
+                    <th className="text-right py-3 px-4">Đơn giá</th>
+                    <th className="text-center py-3 px-4" style={{width: "120px"}}>Số lượng</th>
+                    <th className="text-right py-3 px-4">Tổng giá</th>
+                    <th className="text-right py-3 px-4">Ngày mua</th>
+                 </tr>
+                </thead>
+                <tbody>
+                  {
+                    billProduct.map((bill) => 
+                      <tr>
+                        <td className="p-4">
+                          <div className="media align-items-center">
+                            <img src={bill.product.image} className="d-block ui-w-40 ui-bordered mr-4" alt=""></img>
+                            <div className="media-body">
+                              <a href="#" className="d-block text-dark">{bill.product.nameProduct}</a>
+                              <small>
+                                <span className="text-muted">Màu: </span>{bill.product.color} <br/>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>date</th>
-                    <th>model</th>
-                    <th>price</th>
-                    <th>color</th>
-                    <th>quantity</th>
-                    <th>unitPrice</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    billProduct.map((bill) => (
-                        <tr>
-                            
-                            <td>{bill.id}</td>
-                            <td>{bill.product.nameProduct}</td>
-                            <td>{bill.bill.datePayment}</td>
-                            <td>{bill.product.model}</td>
-                            <td>{bill.product.price}</td>
-                            <td>{bill.product.color}</td>
-                            <td>{bill.quatity}</td>
-                            <td>{bill.unitPrice}</td>
-                            <td>
-                                <img src={bill.product.image} />
-                            </td>
-                        </tr>
-                    ))
-                }
-                
+                                <span className="text-muted">{bill.product.describes}</span> <br/>
+                               
+                              </small>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-right font-weight-semibold align-middle p-4">{bill.product.price}Đ</td>
+                        <td className="align-middle p-4"><input type="number" className="form-control text-center" value={bill.quatity}></input></td>
+                        <td className="text-right font-weight-semibold align-middle p-4">{bill.product.price * bill.quatity}Đ</td>
+                        <td className="text-right font-weight-semibold align-middle p-4">{bill.bill.datePayment}</td>
+                      </tr>
+                    )
+                  }
+                  
+  
+                </tbody>
+              </table>
+            </div>
 
-            </tbody>
-        </table>
+       
 
     </div>
   );

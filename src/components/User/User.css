@@ -56,3 +56,6 @@ body{margin-top:20px;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     }
+    .card{
+        box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);    
+    }

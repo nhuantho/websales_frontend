@@ -17,10 +17,10 @@ export default () => {
 			</div>
 		
 			<form className="file-upload">
-				<div className="row mb-5 gx-7">
+				<div className="row mb-8 gx-10">
 				
-					<div  className="col-xxl-8 mb-5 mb-xxl-0" >
-						<div className="bg-danger px-4 py-5 rounded">
+					<div  className="col-xxl-4" >
+						<div className="bg-secondary-soft  px-4 py-5 rounded">
 							<div className="row g-3">
 								<h4 className="mb-4 mt-0">Thông tin tài khoản của bạn</h4>
 							
@@ -55,14 +55,11 @@ export default () => {
 					</div>
 				
 
-					<div className="col-xxl-4">
-						<div className="bg-secondary-soft px-4 py-5 rounded">
+					<div className="col-xxl-8">
+						<div className="bg-secondary-soft px-6 py-8 rounded">
 							<div className="row g-3">
 								<Bill/>
-								<div className="text-center">
-							
-									<p className="text-muted mt-3 mb-0"><span className="me-1">Note:</span>Không có giao dịch nào cả</p>
-								</div>
+								
 							</div>
 						</div>
 					</div>
