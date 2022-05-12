@@ -76,13 +76,18 @@ export default () => {
   }
   
   //=================================================================
+  const {promotion, setPromotion} = useAppContext();
+
   // Tính tổng tiền
   var Total = 0;
   for( let i = 0; i < carts.length; i++){
     Total += carts[i].product.price * carts[i].quatity
-    
   }
-  console.log(Total);
+  var discountMoney = 0;
+  if( Total > 1000000) {
+    discountMoney = Total * promotion / 100;
+    Total -= discountMoney;
+  }
   
 
   //======================================================================
@@ -93,6 +98,10 @@ export default () => {
     <div className="card">
         <div className="card-header">
             <h2>Giỏ hàng của bạn</h2>
+            <p >
+              <span style={{backgroundColor: "yellow", fontSize: 20, fontStyle: 'italic'}}>Khuyến Mãi Sốc:</span>  
+              <span style={{fontWeight: "bold"}}> Giảm {promotion} % cho đơn hàng từ 1 triệu đồng </span>
+            </p>
         </div>
         <div className="card-body">
             <div className="table-responsive">
@@ -146,7 +155,7 @@ export default () => {
               <div className="d-flex total-payment">
                 <div className="text-right mt-4 mr-8">
                   <label className="text-muted font-weight-normal m-0">Giảm giá</label>
-                  <div className="text-large"><strong>20000Đ</strong></div><br></br>
+                  <div className="text-large"><strong>{discountMoney}</strong></div><br></br>
                 </div>
                 <div className="text-right mt-4">
                   <label className="text-muted font-weight-normal m-0">Tổng giá</label>
