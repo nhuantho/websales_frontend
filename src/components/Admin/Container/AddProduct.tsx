@@ -186,14 +186,14 @@ export default ({ reload }: props) => {
                                 >{size.size + ""}</button>
                             ))
                         }
-                        <button className='bttn' style={{width: "100%", marginTop: "10px"}} onClick={() => addProductSize()}>Hoàn Thành</button>
+                        <button className='bttn' style={{width: "100%", marginTop: "10px", backgroundColor: "#ffc107"}} onClick={() => addProductSize()}>Hoàn Thành</button>
                     </>
                     :
                     <></>
             }
             </td>
             <td>
-                <button className='bttn' onClick={() => {
+                <button className='bttn' style={{backgroundColor: "#ffc107"}} onClick={() => {
                     addProduct()
                 }}
                 >Thêm</button>
