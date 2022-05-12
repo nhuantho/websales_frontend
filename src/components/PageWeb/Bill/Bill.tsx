@@ -65,7 +65,7 @@ export default () => {
   return (
 
     <div>
-        <h1 style={{ marginTop: 100}}>Hóa đơn</h1>
+        <h4 style={{marginBottom: 20}} >Hóa đơn</h4>
         <div className="table-responsive">
               <table className="table table-bordered m-0">
                 <thead>

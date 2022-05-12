@@ -50,6 +50,7 @@ body{
 .table-responsive{
     height: 60vh;
     overflow: hidden scroll;
+    border: 1px solid #ddd;
 }
 
 .card{

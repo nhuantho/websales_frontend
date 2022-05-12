@@ -9,10 +9,10 @@ export default () => {
    
 <div className="container">
  <div className="row">
-		<div className="col-10">
+		<div className="">
 			
 			<div className="my-5">
-				<h3>Tài khoản của bạn</h3>
+				<h2 className="payment-header">Tài khoản của bạn</h2>
 			
 			</div>
 		
@@ -57,9 +57,8 @@ export default () => {
 
 					<div className="col-xxl-8">
 						<div className="bg-secondary-soft px-6 py-8 rounded">
-							<div className="row g-3">
+							<div className="row g-3" style={{marginTop: 0, paddingTop: 15}}>
 								<Bill/>
-								
 							</div>
 						</div>
 					</div>
