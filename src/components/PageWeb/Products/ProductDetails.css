@@ -12,7 +12,7 @@
 
 .headerList{
     margin: 0;
-    padding: 10px 0;
+    padding: 20px 0;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -21,25 +21,31 @@
 }
 
 /* body */
-#bodySection {
+#bodySection-p-detail {
     /* width: 70% */
+    max-width: 1286px;
+    margin: 106px auto 40px;
     background-color: #fff;
 }
 
-#bodySection .bodyContainer {
+#bodySection-p-detail .bodyContainer {
     display: flex;
     flex-wrap: wrap;
     /* padding: 0 150px; */
     background-color: #eee;
-    gap:20px;
+    gap: 20px;
+    padding: 20px;
+    padding-bottom: 40px;
+    justify-content: space-evenly;
 }
 
 .btn-back{
     width: 100%;
     text-align: left;
+    padding: 10px;
 }
 
-#bodySection .bodyContainer .link{
+#bodySection-p-detail .bodyContainer .link{
     height: 40px;
     min-width: 60px;
     margin: 0;
@@ -47,41 +53,45 @@
     color: #000;
 }
 
-#bodySection .bodyContainer .link:hover{
+#bodySection-p-detail .bodyContainer .link:hover{
     background-color: #f6de04;
 }
 
-#bodySection .bodyContainer .image{
-    height: 60vh;
+#bodySection-p-detail .bodyContainer .image{
+    height: 70vh;
+    margin-left: 20px;
 }
 
-#bodySection .bodyContainer .image img{
+#bodySection-p-detail .bodyContainer .image img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+.infomation{
+    margin-right: 20px;
+}
 
-#bodySection .nameProduct {
+#bodySection-p-detail .nameProduct {
     font-weight: 400;
     font-size: 32px;
     margin-bottom: 20px;;
 }
 
-#bodySection .rate {
+#bodySection-p-detail .rate {
     display: flex;
     gap: 5px;
     color: #f6de04;
     margin-bottom: 10px;
 }
 
-#bodySection .rateReviews {
+#bodySection-p-detail .rateReviews {
     vertical-align: middle;
     color: rgba(0, 0, 0, 0.5);
     margin-left: 10px; 
     display: flex;
 }
-#bodySection .priceProduct {
+#bodySection-p-detail .priceProduct {
     color: red;    
     font-family: "Karla", Arial, Helvetica, sans-serif;
     font-size: 28px;
@@ -89,16 +99,16 @@
     margin-bottom: 20px;
 }
 
-#bodySection .describeProduct {
+#bodySection-p-detail .describeProduct {
     display: flex;
     text-align: left;
 }
 
-#bodySection .colorProduct {
+#bodySection-p-detail .colorProduct {
     display: flex;
     text-align: left;
 }
-#bodySection .color {
+#bodySection-p-detail .color {
     font-size: 0;
     width: 25px;
     height: 25px;
@@ -109,11 +119,11 @@
     margin: 10px 0; 
 }
 
-#bodySection .sizeProduct {
+#bodySection-p-detail .sizeProduct {
     text-align: left;
 }
 
-#bodySection .size {
+#bodySection-p-detail .size {
     padding: 0 3px;
     border: 1px solid #fff;
     background-color: #fff;
@@ -121,11 +131,11 @@
     margin: 0 10px;
 }
 
-#bodySection .size:hover {
+#bodySection-p-detail .size:hover {
     background-color: #f6de04;
 }
 
-#bodySection .quantityProduct {
+#bodySection-p-detail .quantityProduct {
     text-align: left;
     margin-top: 30px;
     /* background-color: red; */
@@ -133,7 +143,7 @@
     flex-wrap: wrap;
 }
 
-#bodySection .boxButton {
+#bodySection-p-detail .boxButton {
     border: 1px solid #fff;
     display: inline-flex;
     flex-direction: row;
@@ -143,7 +153,7 @@
     box-sizing: border-box;
 }
 
-#bodySection .btQuantity {
+#bodySection-p-detail .btQuantity {
     border: 1px solid #E0E0E0;
     color: #000;
     background-color: #f9f9f9;
@@ -152,17 +162,17 @@
 
 }
 
-#bodySection .btQuantity:hover {
+#bodySection-p-detail .btQuantity:hover {
     background-color: #fff;
 }
 
-#bodySection .numberQuantity {
+#bodySection-p-detail .numberQuantity {
     margin: 0 10px;
     font-size: 23px;
     line-height: 35px;
 }
 
-#bodySection .btAdd {
+#bodySection-p-detail .btAdd {
     background-color: #000;
     margin-left: 30px;
     color: #fff;
@@ -170,43 +180,43 @@
     transition: all 0.2s linear;
 }
 
-#bodySection .btAdd:hover {
+#bodySection-p-detail .btAdd:hover {
     opacity: .7;
 }
 
-#bodySection .line {
+#bodySection-p-detail .line {
     margin: 30px 0;
     width: 100%;
     height: 1px;
     background-color: #848484;
 }
 
-#bodySection .contact {
+#bodySection-p-detail .contact {
     
 }
 
-#bodySection .wishlist {
+#bodySection-p-detail .wishlist {
     border-width: 0;
     display: flex;
     flex-wrap: wrap;
     /* background-color: red; */
 }
 
-#bodySection .wishlist:hover {
+#bodySection-p-detail .wishlist:hover {
     /* color:#179a94;     */
   
 }
 
-#bodySection .textWishlist{
+#bodySection-p-detail .textWishlist{
     margin: 0 5px;
     line-height: 18px;
 }
 
-#bodySection .boxIcon {
+#bodySection-p-detail .boxIcon {
     display: flex;
     flex-wrap: wrap;
     margin: 10px  5px;
 }
-#bodySection .footerIcon {
+#bodySection-p-detail .footerIcon {
     margin-right: 10px;
 }
