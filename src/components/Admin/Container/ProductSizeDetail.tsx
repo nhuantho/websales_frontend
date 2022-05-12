@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { IoReturnDownBackSharp } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../Navbar/Navbar';
+import "./ProductSizeDetail.css";
 
 type Array_productSizes = [Type_ProductSize]
 
@@ -24,14 +28,23 @@ type Type_ProductSize = {
     quantity: number,
 }
 
-
+const test = {
+      "id": 1,
+      "nameProduct": "Áo thun đỏ đơn giản",
+      "model": "Áo",
+      "image": "https://firebasestorage.googleapis.com/v0/b/test-62604.appspot.com/o/img1.jpg?alt=media&token=00b86012-129f-4885-8033-77655cf76e03",
+      "price": 150000,
+      "describes": "Chất liệu vải cốt tông, mặc thoải mái",
+      "color": "Đỏ"
+}
 
 export default ()  => {
     const {idP, setIdP} = useAppContext();
     const [productSize, setProductSize] = useState([]);
-
+    const [product, setProduct] = useState(test)
     useEffect(() => {
         getAPI();
+        getProduct();
     }, []);
     const getAPI = () => {
     axios({
@@ -41,36 +54,95 @@ export default ()  => {
         })
           .then((res) => {
             setProductSize(res.data);
-            console.log(res.data);
-            
           })
           .catch((err) => {
             console.log(err);
           });
     };
 
+    const getProduct = () => {
+      axios({
+          method: "get",
+          url: `http://localhost:9191/productById/${idP}`,
+          data: null,
+          })
+            .then((res) => {
+              setProduct(res.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      };
+// ===============================================
+const navigate = useNavigate();
+ // ==========================================
+ const StylePrice = (price : number) => {
+  let num = price+""
+  let s = "";
+  for( let i = 0; i < num.length; i++)
+  {
+    s = num[num.length -1 - i ] + s;
+
+    if((i+1) % 3 ==0 && i != (num.length-1) ) {
+      s = "." + s;
+    }
+  }
+  return s;
+}
   return (
     //   huy
-    <div style={{marginTop: 100}}>
-        <h1>ID Product: {idP}</h1>
-        <table>
+    <div id="bodySection">
+        <div className="bodyContainer">
+          <div className="btn-back">
+            <button className="link bttn" 
+              onClick={() => navigate(-1)}
+            >
+              <IoReturnDownBackSharp size={25} />{" "}
+            </button>
+          </div>
+          <div className="image">
+            <img src={productSize.length > 0 ? product.image:""} />
+          </div>
+          <div className="infomation">
+            <h1 className="nameProduct">{productSize.length > 0 ?product.nameProduct:""}</h1>
+
+            <div className="rate">
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiOutlineStar />
+              <AiOutlineStar />
+              <span className="rateReviews"></span>
+            </div>
+
+            <div className="priceProduct">{productSize.length > 0 ? StylePrice(product.price) :""} <span>đ</span> </div>
+
+            <div className="describeProduct">
+              <p>{product.describes}</p>
+            </div>
+           
+           {/* bang size */}
+            <table>
+                <thead>
+                <tr>
+                    <th>Size</th>
+                    <th>Số lượng</th>
+                    <th>Update</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    productSize.map(ps => (
+                        <Product_Size ps={ps} />
+                    ))
+                }
+                </tbody>
+            </table>
+            <div className="line"></div>
+
+          </div>
+        </div>
         
-            <thead>
-            <tr>
-                <th>Size</th>
-                <th>Số lượng</th>
-                <th>Update</th>
-            </tr>
-            </thead>
-            
-            <tbody>
-            {
-                productSize.map(ps => (
-                    <Product_Size ps={ps} />
-                ))
-            }
-            </tbody>
-        </table>
     </div>
     
   )
