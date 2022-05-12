@@ -50,6 +50,7 @@ export default ()  => {
     };
 
   return (
+    //   huy
     <div style={{marginTop: 100}}>
         <h1>ID Product: {idP}</h1>
         <table>
