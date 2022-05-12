@@ -109,11 +109,14 @@ export default function Payment() {
 
   // Tính tổng tiền
   var Total = 0;
-  for (let i = 0; i < carts.length; i++) {
+  for( let i = 0; i < carts.length; i++){
     Total += carts[i].product.price * carts[i].quatity
   }
-  //  check khuyen mai
-  if(Total >= 1000000) Total= Total*(100-promotion)/100;
+  var discountMoney = 0;
+  if( Total > 1000000) {
+    discountMoney = Total * promotion / 100;
+    Total -= discountMoney;
+  }
   //=================================================================
   const [modalBank, setModaBank] = useState(true)
   const [bank, setBank] = useState("VCB")
@@ -276,6 +279,17 @@ export default function Payment() {
               }
             </tbody>
           </table>
+        </div>
+        
+        <div className="d-flex total-payment">
+                <div className="text-right mt-4 mr-8">
+                  <label className="text-muted font-weight-normal m-0">Giảm giá</label>
+                  <div className="text-large"><strong>{discountMoney}</strong></div><br></br>
+                </div>
+                <div className="text-right mt-4">
+                  <label className="text-muted font-weight-normal m-0">Tổng giá</label>
+                  <div className="text-large"><strong>{Total}Đ</strong></div>
+                </div>
         </div>
 
         <div className="payment-method">
