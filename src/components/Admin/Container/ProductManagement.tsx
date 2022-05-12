@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UpdateProductItem from "./UpdateProductItem";
 import "./ProductManagementStyle.css"
 import UploadImage from "./UploadImage";
 import AddPoduct from "./AddProduct";
+import { useAppContext } from "../../Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 
 type product = {
@@ -18,8 +20,10 @@ type product = {
 
 type props = {
   deleteProduct: (id: Number) => void;
-  setUpdateModal: (isUpdate: Boolean) => void
+  setIdProduct: (id: Number) => void;
+  setUpdateModal: (isUpdate: Boolean) => void;
   product: product;
+  
 };
 
 export default () => {
@@ -55,7 +59,6 @@ export default () => {
       data: null,
     })
       .then((res) => {
-        // deleteProductSize(id)
       })
       .catch((err) => {
         console.log(err);
@@ -69,8 +72,22 @@ export default () => {
     deleteByProductID(id, "http://localhost:9191/deleteBillProductByProductId/")
     getApi();
   }
+  
   // product, productSize, billProdcut, cart
+  const {idP, setIdP} = useAppContext();
 
+  const  setIdProduct = (id: Number) => {
+    setIdP(Number(id));
+    nextScreen();
+  }
+  //  chuyen trang
+  const navigate = useNavigate();
+
+  function nextScreen() {
+    navigate("detail");
+  }
+
+  
   return (
     <div style={{ marginTop: 100 }}>
       <div className="container">
@@ -120,7 +137,7 @@ export default () => {
                   :
                   <>
                     {products.map((product) => (
-                      <DeleteProduct deleteProduct={deleteProduct} setUpdateModal={setUpdateModal} product={product} />
+                      <ShowProduct deleteProduct={deleteProduct} setIdProduct={setIdProduct} setUpdateModal={setUpdateModal}  product={product}  />
                     ))}
                   </>
               }
@@ -132,7 +149,7 @@ export default () => {
   );
 };
 
-const DeleteProduct = ({ deleteProduct, setUpdateModal, product }: props) => (
+const ShowProduct = ({ deleteProduct ,setIdProduct ,setUpdateModal, product  }: props) => (
   <tr>
     <td >{product.id}</td>
     <td >{product.nameProduct}</td>
@@ -141,8 +158,12 @@ const DeleteProduct = ({ deleteProduct, setUpdateModal, product }: props) => (
     <td >{product.describes}</td>
     <td >{product.color}</td>
     <td style={{display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "10px"}}>
-      <button className="bttn" onClick={() => { deleteProduct(product.id) }}>xóa</button>
+      <button className="bttn" onClick={() => deleteProduct(product.id) }>xóa</button>
       <button className="bttn" onClick={() => setUpdateModal(false)}>Sửa</button>
+      <button className="bttn"onClick={() => setIdProduct(product.id)} >Xem chi tiết</button>
     </td>
   </tr>
 )
+
+
+

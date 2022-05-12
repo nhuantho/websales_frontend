@@ -28,6 +28,7 @@ import Bill from "../PageWeb/Bill/Bill";
 import "./Navbar.css";
 import Payment from "../PageWeb/Payment/Payment";
 import PayDone from "../PageWeb/Payment/PayDone";
+import ProductSizeDetail from "../Admin/Container/ProductSizeDetail";
 
 type user = {
   id: number;
@@ -159,6 +160,10 @@ export default () => {
             <Route
               path="/admin/productmanagement"
               element={<ProductManagement />}
+            />
+            <Route
+              path="/admin/productmanagement/detail"
+              element={<ProductSizeDetail />}
             />
             <Route path="/admin/productsales" element={<ProductSales />} />
             <Route

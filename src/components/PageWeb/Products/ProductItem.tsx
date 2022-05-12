@@ -30,7 +30,7 @@ export default function ProductItem({
   const { idP, setIdP } = useAppContext();
   const togg = () => {
     onClick();
-    setIdP(id);
+    setIdP(id); 
   };
 
   const StylePrice = (price : number) => {
