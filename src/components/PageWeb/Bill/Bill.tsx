@@ -98,7 +98,7 @@ export default () => {
                         </td>
                         <td className="text-right font-weight-semibold align-middle p-4">{bill.product.price}Đ</td>
                         <td className="align-middle p-4"><input type="number" className="form-control text-center" value={bill.quatity}></input></td>
-                        <td className="text-right font-weight-semibold align-middle p-4">{bill.product.price * bill.quatity}Đ</td>
+                        <td className="text-right font-weight-semibold align-middle p-4">{bill.unitPrice}Đ</td>
                         <td className="text-right font-weight-semibold align-middle p-4">{bill.bill.datePayment}</td>
                       </tr>
                     )

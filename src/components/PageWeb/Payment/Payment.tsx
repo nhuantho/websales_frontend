@@ -90,6 +90,7 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const { user, setUser } = useAppContext();
+  const {promotion, setPromotion} = useAppContext();
   const [carts, setCarts] = useState<CartProduct[]>([]);
   // const [billId, setBillId] = useState(0);
 
@@ -108,8 +109,13 @@ export default function Payment() {
 
   // Tính tổng tiền
   var Total = 0;
-  for (let i = 0; i < carts.length; i++) {
+  for( let i = 0; i < carts.length; i++){
     Total += carts[i].product.price * carts[i].quatity
+  }
+  var discountMoney = 0;
+  if( Total > 1000000) {
+    discountMoney = Total * promotion / 100;
+    Total -= discountMoney;
   }
   //=================================================================
   const [modalBank, setModaBank] = useState(true)
@@ -167,7 +173,7 @@ export default function Payment() {
         "bill_id": billId,
         "product_id": product_id,
         "quatity": quatity,
-        "unitPrice": unitPrice
+        "unitPrice": Total,
       },
     })
       .then((res) => { })
@@ -176,7 +182,7 @@ export default function Payment() {
 
   const AddManyBillProduct = (id: number) => {
     for (let i = 0; i < carts.length; i++) {
-      AddBillProduct(id, carts[i].product_id, carts[i].quatity, carts[i].quatity * carts[i].product.price)
+      AddBillProduct(id, carts[i].product_id, carts[i].quatity, Total)
       get_ProductSize(carts[i].product_id, carts[i].size_id, carts[i].quatity);
     }
     DeleteAllCartByClientId();
@@ -246,6 +252,10 @@ export default function Payment() {
           <h3>Họ và tên: {user.fullname}</h3>
           <p>Địa chỉ: {user.address}</p>
           <p>Số điện thoại: {user.phone}</p>
+          <p >
+            <span style={{backgroundColor: "yellow", fontSize: 20, fontStyle: 'italic'}}>Khuyến Mãi Sốc:</span>  
+            <span style={{fontWeight: "bold"}}> Giảm {promotion} % cho đơn hàng từ 1 triệu đồng </span>
+          </p>
         </div>
         <div className='payment-table'>
           <table>
@@ -269,6 +279,17 @@ export default function Payment() {
               }
             </tbody>
           </table>
+        </div>
+        
+        <div className="d-flex total-payment" style={{justifyContent: 'end'}}>
+                <div className="text-right mt-4 mr-8">
+                  <label className="text-muted font-weight-normal m-0">Giảm giá</label>
+                  <div className="text-large"><strong>{discountMoney}</strong></div><br></br>
+                </div>
+                <div className="text-right mt-4">
+                  <label className="text-muted font-weight-normal m-0">Tổng giá</label>
+                  <div className="text-large"><strong>{Total}Đ</strong></div>
+                </div>
         </div>
 
         <div className="payment-method">
