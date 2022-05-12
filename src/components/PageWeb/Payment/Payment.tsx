@@ -173,7 +173,7 @@ export default function Payment() {
         "bill_id": billId,
         "product_id": product_id,
         "quatity": quatity,
-        "unitPrice": unitPrice
+        "unitPrice": Total,
       },
     })
       .then((res) => { })
@@ -182,7 +182,7 @@ export default function Payment() {
 
   const AddManyBillProduct = (id: number) => {
     for (let i = 0; i < carts.length; i++) {
-      AddBillProduct(id, carts[i].product_id, carts[i].quatity, carts[i].quatity * carts[i].product.price)
+      AddBillProduct(id, carts[i].product_id, carts[i].quatity, Total)
       get_ProductSize(carts[i].product_id, carts[i].size_id, carts[i].quatity);
     }
     DeleteAllCartByClientId();
@@ -281,7 +281,7 @@ export default function Payment() {
           </table>
         </div>
         
-        <div className="d-flex total-payment">
+        <div className="d-flex total-payment" style={{justifyContent: 'end'}}>
                 <div className="text-right mt-4 mr-8">
                   <label className="text-muted font-weight-normal m-0">Giảm giá</label>
                   <div className="text-large"><strong>{discountMoney}</strong></div><br></br>
