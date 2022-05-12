@@ -56,6 +56,13 @@ export default () => {
     else 
       return "white"
   }
+  const [select, setSelect] = useState("all");
+  const checkSelect = (data : String) => {
+    if(data == select) 
+      return "#f6de04"
+    else 
+      return "white"
+  }
 
   const getAPIbyColor = (color : string) => {
     setColor(color)
@@ -148,22 +155,22 @@ export default () => {
         <div id="headerSection">
         <ul className="headerList">
           <li className="headerItem">
-            <button className="link bttn" onClick={() => getAPI("http://localhost:9191/products")}>
+            <button style={{backgroundColor: checkSelect("all")}} className="link bttn" onClick={() =>{ getAPI("http://localhost:9191/products"); setSelect("all")}}>
               Xem tất cả
             </button>
           </li>
           <li className="headerItem">
-            <button className="link bttn" onClick={() => getAPI("http://localhost:9191/productByModel/Áo")}>
+            <button style={{backgroundColor: checkSelect("ao")}} className="link bttn" onClick={() => {getAPI("http://localhost:9191/productByModel/Áo"); setSelect("ao")}}>
               Áo
             </button>
           </li>
           <li className="headerItem">
-            <button className="link bttn" onClick={() => getAPI("http://localhost:9191/productByModel/Giày")}>
+            <button style={{backgroundColor: checkSelect("giay")}} className="link bttn" onClick={() => {getAPI("http://localhost:9191/productByModel/Giày"); setSelect("giay")}}>
               Giày
             </button>
           </li>
           <li className="headerItem">
-            <button className="link bttn" onClick={() => getAPI("http://localhost:9191/productByModel/Đồng hồ")}>
+            <button style={{backgroundColor: checkSelect("dongho")}} className="link bttn" onClick={() => {getAPI("http://localhost:9191/productByModel/Đồng hồ");setSelect("dongho") }}>
               Đồng hồ
             </button>
           </li>
