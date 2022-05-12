@@ -2,13 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../Navbar/Navbar';
+import Footer from '../Store/Footer';
 import "./Payment.css"
 
 
 type CartProduct = {
   id: number,
   client_id: number,
-  user : {
+  user: {
     id: number,
     fullname: string,
     dob: string,
@@ -21,23 +22,23 @@ type CartProduct = {
     note: string,
 
   },
-  product_id : number,
-  product : {
+  product_id: number,
+  product: {
     id: number,
-    nameProduct:string,
-    model:string,
-    image:string,
+    nameProduct: string,
+    model: string,
+    image: string,
     price: number,
-    describes:string,
-    color:string,    
+    describes: string,
+    color: string,
   }
-  size_id : number,
+  size_id: number,
   size: {
     id: number,
     size: string
   }
-  extraDate : String,
-  quatity : number,
+  extraDate: String,
+  quatity: number,
 }
 
 type BillProduct = {
@@ -49,24 +50,24 @@ const productSizeType = {
   "id": 1,
   "product_id": 1,
   "product": {
-      "id": 1,
-      "nameProduct": "Áo thun đỏ đơn giản",
-      "model": "Áo",
-      "image": "https://firebasestorage.googleapis.com/v0/b/test-62604.appspot.com/o/img1.jpg?alt=media&token=00b86012-129f-4885-8033-77655cf76e03",
-      "price": 150000,
-      "describes": "Chất liệu vải cốt tông, mặc thoải mái",
-      "color": "Đỏ"
+    "id": 1,
+    "nameProduct": "Áo thun đỏ đơn giản",
+    "model": "Áo",
+    "image": "https://firebasestorage.googleapis.com/v0/b/test-62604.appspot.com/o/img1.jpg?alt=media&token=00b86012-129f-4885-8033-77655cf76e03",
+    "price": 150000,
+    "describes": "Chất liệu vải cốt tông, mặc thoải mái",
+    "color": "Đỏ"
   },
   "size_id": 1,
   "size": {
-      "id": 1,
-      "size": "S"
+    "id": 1,
+    "size": "S"
   },
   "quantity": 10
 }
 type ProductSizes = {
-  id : number,
-  product_id : number,
+  id: number,
+  product_id: number,
   product: {
     id: number,
     nameProduct: String,
@@ -74,12 +75,12 @@ type ProductSizes = {
     image: String,
     price: String,
     describes: String,
-    color: String,    
+    color: String,
   },
   size_id: number,
   size: {
-    id : number,
-    size : String,
+    id: number,
+    size: String,
   },
   quantity: number,
 }
@@ -92,31 +93,31 @@ export default function Payment() {
   const [carts, setCarts] = useState<CartProduct[]>([]);
   // const [billId, setBillId] = useState(0);
 
-  const [infoPayment, setInfoPayment] = useState("online"); 
+  const [infoPayment, setInfoPayment] = useState("online");
   const checkInfoPayment = (data: string) => {
-    if(infoPayment == data) 
-      return 'red'
-    else 
+    if (infoPayment == data)
+      return 'orange'
+    else
       return 'white'
   }
 
   // date time
   var showDate = new Date();
-  var date = showDate.getDate()+"/"+(showDate.getMonth()+1)+"/"+showDate.getFullYear();
-  var dateTime = showDate.getHours()+":"+showDate.getMinutes()+":"+showDate.getSeconds(); 
+  var date = showDate.getDate() + "/" + (showDate.getMonth() + 1) + "/" + showDate.getFullYear();
+  var dateTime = showDate.getHours() + ":" + showDate.getMinutes() + ":" + showDate.getSeconds();
 
   // Tính tổng tiền
   var Total = 0;
-  for( let i = 0; i < carts.length; i++){
+  for (let i = 0; i < carts.length; i++) {
     Total += carts[i].product.price * carts[i].quatity
   }
   //=================================================================
   const [modalBank, setModaBank] = useState(true)
-  const [bank,setBank] = useState("VCB")
-  const listBank = ["VCB","AGRI","VPBANK","OceanBank","Techcombank","MB","NCB"]
+  const [bank, setBank] = useState("VCB")
+  const listBank = ["VCB", "AGRI", "VPBANK", "OceanBank", "Techcombank", "MB", "NCB"]
 
-  const checkBank = (data : String) => {
-    if(data == bank)
+  const checkBank = (data: String) => {
+    if (data == bank)
       return "orange"
     else return "white"
   }
@@ -130,7 +131,7 @@ export default function Payment() {
   const getAPI = () => {
     axios({
       method: "get",
-      url: "http://localhost:9191/cartByClientId/"+user.id,
+      url: "http://localhost:9191/cartByClientId/" + user.id,
       data: null,
     })
       .then((res) => {
@@ -148,59 +149,59 @@ export default function Payment() {
       url: `http://localhost:9191/addBill`,
       data: {
         "client_id": user.id,
-        "datePayment": showDate.getHours()+":"+showDate.getMinutes()+":"+showDate.getSeconds() + " " + showDate.getDate()+"/"+(showDate.getMonth()+1)+"/"+showDate.getFullYear(),
+        "datePayment": showDate.getHours() + ":" + showDate.getMinutes() + ":" + showDate.getSeconds() + " " + showDate.getDate() + "/" + (showDate.getMonth() + 1) + "/" + showDate.getFullYear(),
         "infoPayment": infoPayment
       },
     })
       .then((res) => {
-        AddManyBillProduct(res.data.id)       
+        AddManyBillProduct(res.data.id)
       })
-      .catch((err) => {console.log(err);});
+      .catch((err) => { console.log(err); });
   }
 
-  const AddBillProduct = (billId: number, product_id: number, quatity: number, unitPrice:number) => {
+  const AddBillProduct = (billId: number, product_id: number, quatity: number, unitPrice: number) => {
     axios({
       method: "post",
       url: `http://localhost:9191/addBillProduct`,
       data: {
         "bill_id": billId,
-        "product_id":product_id,
+        "product_id": product_id,
         "quatity": quatity,
-        "unitPrice" : unitPrice
+        "unitPrice": unitPrice
       },
     })
-      .then((res) => {})
-      .catch((err) => {console.log(err);});
+      .then((res) => { })
+      .catch((err) => { console.log(err); });
   }
 
-  const AddManyBillProduct = (id : number) => {
-    for(let i=0; i < carts.length; i++ ){
-      AddBillProduct(id,carts[i].product_id, carts[i].quatity, carts[i].quatity*carts[i].product.price)
+  const AddManyBillProduct = (id: number) => {
+    for (let i = 0; i < carts.length; i++) {
+      AddBillProduct(id, carts[i].product_id, carts[i].quatity, carts[i].quatity * carts[i].product.price)
       get_ProductSize(carts[i].product_id, carts[i].size_id, carts[i].quatity);
     }
     DeleteAllCartByClientId();
     navigate("payDone")
     // giam so luong san pham trong kho
-    
+
     //==============================
     alert("Thanh toan thanh cong")
   }
 
   //==================================================================
-  
-  const  DeleteAllCartByClientId = () => {
+
+  const DeleteAllCartByClientId = () => {
     axios({
       method: "delete",
       url: `http://localhost:9191/deleteAllCart/` + user.id,
       data: null,
     })
-      .then((res) => {})
-      .catch((err) => {console.log(err);});
+      .then((res) => { })
+      .catch((err) => { console.log(err); });
   }
   // ================================================================
   // lay ra productSize
   var productSize_id = 0;
-  var productSize_quantity=0;
+  var productSize_quantity = 0;
   // product_id + size_id
   const get_ProductSize = (product_id: number, size_id: number, quantity: number) => {
     axios({
@@ -213,98 +214,131 @@ export default function Payment() {
     })
       .then((res) => {
         update_quantity_ProductSize(res.data.id, res.data.quantity, quantity)
-    })
+      })
       .catch((err) => {
         console.log(err);
-    });
+      });
   }
 
   // giam so luong
-  const update_quantity_ProductSize = (id : number, shop_quantity : number, product_quantity: number) => {
-      
+  const update_quantity_ProductSize = (id: number, shop_quantity: number, product_quantity: number) => {
+
     axios({
       method: "put",
       url: "http://localhost:9191/updateProductSize",
       data: {
         "id": id,
         "quantity": (shop_quantity - product_quantity),
-    }
+      }
     })
       .then((res) => {
-    })
+      })
       .catch((err) => {
         console.log(err);
-    });
+      });
   }
 
   return (
-    <div id="body">
-      <h2>thanh toán</h2>
-      <p>
-        Thông tin hóa đơn
-        .................
-        .................
-        .................
-        .................
-      </p>
-      <div>
-        {
-          carts.map((cart) => (
-            <ProductInCart  cart={cart}/>
-          ))
-        }
+    <>
+      <div id="body-payment" className='container'>
+        <h2 className='payment-header'>Hóa Đơn</h2>
+        <div className="payment-user">
+          <h3>Họ và tên: {user.fullname}</h3>
+          <p>Địa chỉ: {user.address}</p>
+          <p>Số điện thoại: {user.phone}</p>
+        </div>
+        <div className='payment-table'>
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Loại</th>
+                <th>Tổng tiền</th>
+                <th>Màu</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                carts.map((cart, index) => (
+                  <ProductInCart cart={cart} index={index} />
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div className="payment-method">
+          <h2 className='payment-method-header'>
+            Phương thức thanh toán
+          </h2>
+          <div className="payment-btn">
+            <button className="bttn" style={{ backgroundColor: checkInfoPayment("online") }}
+              onClick={() => { setInfoPayment("online"); setModaBank(!modalBank) }}
+            >
+              Thanh toán quan tài khoản ngân hàng
+            </button>
+
+            <button className="bttn" style={{ backgroundColor: checkInfoPayment("offline") }}
+              onClick={() => { setInfoPayment("offline"); setModaBank(false) }}
+            >
+              Thanh toán khi nhận hàng
+            </button>
+          </div>
+
+          {
+            modalBank ?
+              <div className='payment-modal'>
+                <h3>Chọn ngân hàng</h3>
+                <div className="payment-modal-bank">
+                  {
+                    listBank.map((bank) => (
+                      <button className="bttn"
+                        style={{ backgroundColor: checkBank(bank) }}
+                        onClick={() => setBank(bank)}
+                      >{bank}</button>
+                    ))
+                  }
+
+                </div>
+              </div>
+              :
+              <></>
+          }
+        </div>
+
+        <div className='payment-time'>
+          <span>Thời gian: {dateTime + " " + date}</span>
+        </div>
+
+        <button className="btn btn-lg btn-primary mt-2" onClick={() => (AddBill())}>Thanh toán</button>
+
       </div>
-      <button style={{backgroundColor: checkInfoPayment("online") }}
-        onClick = {() => {setInfoPayment("online"); setModaBank(!modalBank)}}
-      >
-        Thanh toán quan tài khoản ngân hàng
-      </button>
-
-      <button style={{backgroundColor: checkInfoPayment("offline") }}
-        onClick = {() => {setInfoPayment("offline"); setModaBank(false)}}
-      >
-        Thanh toán khi nhận hàng
-      </button>
-
-      {
-        modalBank ? 
-          <div style={{backgroundColor:"green", width: "100%", padding: 30}}>
-            <h3>Chọn ngân hàng</h3>
-            {
-              listBank.map((bank)=>(
-                  <button 
-                    style={{backgroundColor: checkBank(bank)}}
-                    onClick={() => setBank(bank)}
-                  >{bank}</button>
-              ))
-            }
-
-          </div> 
-        : 
-          <></>
-      }
-
-      <div>
-        <span>Thời gian</span> {dateTime + " " + date}
-      </div>
-      
-      <button onClick={() => (AddBill())}>Thanh toán</button>
-
-    </div>
+      <Footer />
+    </>
   )
 }
 
 type props = {
-  cart : CartProduct
+  cart: CartProduct
+  index: number
 }
 
 // hien thong tin san pham trong hooa don
-const ProductInCart = ({cart} : props) => (
-  <div>
-    <img src={cart.product.image} className="cartImage"/>
-    <span>{cart.product.nameProduct}</span>
-    <span>{cart.product.model}</span>
-    <span>{cart.product.price}</span>
-    <span>{cart.product.color}</span>
-  </div>
+const ProductInCart = ({ cart, index }: props) => (
+  <tr>
+    <td>{index + 1}</td>
+    <td>
+      <img src={cart.product.image} className="cartImage" />
+    </td>
+    <td>{cart.product.nameProduct}</td>
+    <td>{cart.product.price}</td>
+    <td>{cart.quatity}</td>
+    <td>{cart.product.model}</td>
+    <td>{cart.product.price * cart.quatity}</td>
+    <td>{cart.product.color}</td>
+  </tr>
 )
