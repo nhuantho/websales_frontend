@@ -11,31 +11,33 @@ export default () => {
         <div id="footerSection">
         <div className="footerContainer">
           <div className="footerContact">
-            <h3 className="footerTitle">Contact</h3>
+            <h3 className="footerTitle">Liên hệ</h3>
             <div className="contactContent">
               <a href="" className="contactText">
                 <MdLocationOn color="#fff" size={20}/> 
-                <span className="contactSpan">Location</span>
+                <span className="contactSpan">PTIT, Hà Đông, Hà Nội</span>
               </a>
 
               <a href="" className="contactText">
                 <BsTelephoneFill color="#fff" size={20}/> 
-                <span className="contactSpan">Call +0123456789</span>
+                <span className="contactSpan">+0123456789</span>
               </a>
 
               <a href="" className="contactText">
                 <CgMail color="#fff" size={20}/> 
-                <span className="contactSpan">koyomi@gmail.com</span>
+                <span className="contactSpan">ltw@gmail.com</span>
               </a>
             </div>
           </div>
 
           <div className="footerContact">
-            <h3 className="footerTitle">Famms</h3>
-            <p>Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with</p>
+            <h3 className="footerTitle">Giới thiệu</h3>
+            <p>Cảm ơn bạn đã ghé thăm Websales của chúng tôi. Hãy ghé thăm gian hàng và theo dõi fanpage để có trải nghiệm thật tốt các sản phẩm shop chúng tôi nhé!</p>
             <div className="boxIcon">
               <div className="footerIcon">
+                <a href="https://www.facebook.com/anuj.kumarsaxena.5/" target="blank_"></a>
                 <FaFacebook size={30}/>
+               
               </div>
               <div className="footerIcon">
                 <FaInstagram size={30}/>
@@ -55,8 +57,8 @@ export default () => {
 
         <div className="footerInfo">
           <div className="footerLine"/>
-          <p>© 2022 All Rights Reserved By Free Html Templates</p>
-          <p>Distributed By ThemeWagon</p>
+          <p>© 2022 Học viện Công Nghệ Bưu Chính Viễn Thông</p>
+          <p>Chi nhánh tại Hà Nội</p>
         </div>
       </div>
     );

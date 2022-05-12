@@ -24,8 +24,8 @@ export default () => {
             </div>
             <Carousel.Caption>
               <div className="slide-content">
-                <h3>Are you looking for a new style?</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <h3>Chào mừng khách hàng đến với Websales</h3>
+                <p>Thời trang chúng tôi tạo ra với mong muốn đem lại sự cân bằng giữa phong cách bên ngoài và sự thoải mái bên trong, toát lên sự gần gửi, trẻ trung cho quý khách hàng </p>
                 <button className="btn btn-primary"
                   type="button"
                   onClick={(e) => {
@@ -50,7 +50,7 @@ export default () => {
             <Carousel.Caption>
               <div className="slide-content">
                 <h3>T shirt</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>Chất liệu vải cotton, mềm mại và thoải mái cho quý khách hàng khi mặc.</p>
                 <button className="btn btn-primary"
                   type="button"
                   onClick={(e) => {
@@ -75,7 +75,7 @@ export default () => {
             <Carousel.Caption>
               <div className="slide-content">
                 <h3>Shoe</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>Những đôi giày nâng bước chân quý khách lên một tầm cao mới.</p>
                 <button className="btn btn-primary"
                   type="button"
                   onClick={(e) => {
@@ -100,7 +100,7 @@ export default () => {
             <Carousel.Caption>
               <div className="slide-content">
                 <h3>Watch</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>Đồng hồ Thụy Sỹ cao cấp, chính hãng, mang đậm chất thanh lịch và nam tính.</p>
                 <button className="btn btn-primary"
                   type="button"
                   onClick={(e) => {
@@ -124,8 +124,8 @@ export default () => {
             </div>
             <Carousel.Caption>
               <div className="slide-content">
-                <h3>Always ensure quality and customer service!</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <h3>Luôn luôn đảm bảo chất lượng và sự thanh lịch!</h3>
+                <p>Để tận hưởng những khoảnh khắc tuyệt vời, hãy đến với Websales.</p>
                 <button className="btn btn-primary"
                   type="button"
                   onClick={(e) => {
