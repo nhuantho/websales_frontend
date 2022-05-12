@@ -29,6 +29,7 @@ import "./Navbar.css";
 import Payment from "../PageWeb/Payment/Payment";
 import PayDone from "../PageWeb/Payment/PayDone";
 import ProductSizeDetail from "../Admin/Container/ProductSizeDetail";
+import Map from "../../Map";
 
 type user = {
   id: number;
@@ -177,6 +178,7 @@ export default () => {
             <Route path="/payment" element={<Payment />} />
             <Route path="/payment/payDone" element={<PayDone />} />
             <Route path="/user" element={<User />} />
+            <Route path="/map" element={<Map />} />
           </Routes>
         </div>
       </Router>

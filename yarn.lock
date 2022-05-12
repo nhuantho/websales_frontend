@@ -1850,6 +1850,11 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
+"@react-leaflet/core@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-2.0.0.tgz#212f4d87dc7681f40ca0e47d99672676c20c8ef6"
+  integrity sha512-SQQ5DCQIaLzvslN6wCXs5OWqtlvk1Ubv2n5d7zTM8SDl9hM5Rr2wVy7/nOCIY958D75/ovhq6ZoSvT7GLCX6sg==
+
 "@restart/hooks@^0.4.0", "@restart/hooks@^0.4.6":
   version "0.4.6"
   resolved "https://registry.npmjs.org/@restart/hooks/-/hooks-0.4.6.tgz"
@@ -2209,6 +2214,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/geojson@*":
+  version "7946.0.8"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.8.tgz#30744afdb385e2945e22f3b033f897f76b1f12ca"
+  integrity sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA==
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
   resolved "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.5.tgz"
@@ -2269,6 +2279,13 @@
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+
+"@types/leaflet@^1.7.10":
+  version "1.7.10"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.7.10.tgz#092f97af29bb870b7d1ed72d516d4b3dde66a6c8"
+  integrity sha512-RzK5BYwYboOXXxyF01tp8g1J8UbdRvoaf+F/jCnVaWC42+QITB6wKvUklcX7jCMRWkzTnGO9NLg7A6SzrlGALA==
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/long@^4.0.1":
   version "4.0.2"
@@ -6106,6 +6123,11 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
+leaflet@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.8.0.tgz#4615db4a22a304e8e692cae9270b983b38a2055e"
+  integrity sha512-gwhMjFCQiYs3x/Sf+d49f10ERXaEFCPr+nVTryhAW8DWbMGqJqt9G4XuIaHmFW08zYvhgdzqXGr8AlW8v8dQkA==
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/leven/-/leven-3.1.0.tgz"
@@ -7600,13 +7622,13 @@ react-dev-utils@^12.0.1:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-react-dom@^18.0.0:
-  version "18.0.0"
-  resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.0.0.tgz"
-  integrity sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw==
+react-dom@^18.1.0:
+  version "18.1.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.1.0.tgz#7f6dd84b706408adde05e1df575b3a024d7e8a2f"
+  integrity sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w==
   dependencies:
     loose-envify "^1.1.0"
-    scheduler "^0.21.0"
+    scheduler "^0.22.0"
 
 react-error-overlay@^6.0.11:
   version "6.0.11"
@@ -7627,6 +7649,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-leaflet@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-4.0.0.tgz#9c2b8de82c6f5930387f5b1b37cb0ec4d8f98d61"
+  integrity sha512-qJJvoCNe12XHSWVUwhXYmMObPoSYy8h/hn0aDNvcBuq3O8zmVI5S2RdabhaDg/iWMCJ2jbCWZWtIU5VtztO9sg==
+  dependencies:
+    "@react-leaflet/core" "^2.0.0"
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -8004,10 +8033,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.21.0:
-  version "0.21.0"
-  resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.21.0.tgz"
-  integrity sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==
+scheduler@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.22.0.tgz#83a5d63594edf074add9a7198b1bae76c3db01b8"
+  integrity sha512-6QAm1BgQI88NPYymgGQLCZgvep4FyePDWFpXVK+zNSUgHwlqpJy8VEh8Et0KxTACS4VWwMousBElAZOH9nkkoQ==
   dependencies:
     loose-envify "^1.1.0"
 
