@@ -126,7 +126,7 @@ const navigate = useNavigate();
                 <thead style={{backgroundColor: "#00bcd4"}}>
                 <tr>
                     <th>Size</th>
-                    <th>Số lượng</th>
+                    <th>Số lượng trong kho</th>
                     <th>Update</th>
                 </tr>
                 </thead>
