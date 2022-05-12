@@ -158,9 +158,9 @@ const ShowProduct = ({ deleteProduct ,setIdProduct ,setUpdateModal, product  }: 
     <td >{product.describes}</td>
     <td >{product.color}</td>
     <td style={{display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "10px"}}>
-      <button className="bttn" onClick={() => deleteProduct(product.id) }>xóa</button>
-      <button className="bttn" onClick={() => setUpdateModal(false)}>Sửa</button>
-      <button className="bttn"onClick={() => setIdProduct(product.id)} >Xem chi tiết</button>
+      <button className="bttn" style={{backgroundColor: "#dc3545"}} onClick={() => deleteProduct(product.id) }>xóa</button>
+      <button className="bttn" style={{backgroundColor: "#ffc107"}} onClick={() => setUpdateModal(false)}>Sửa</button>
+      <button className="bttn" style={{backgroundColor: "#0d6efd"}} onClick={() => setIdProduct(product.id)} >Xem chi tiết</button>
     </td>
   </tr>
 )

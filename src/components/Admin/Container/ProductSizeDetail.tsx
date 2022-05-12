@@ -91,7 +91,7 @@ const navigate = useNavigate();
 }
   return (
     //   huy
-    <div id="bodySection">
+    <div id="bodySection-p-detail">
         <div className="bodyContainer">
           <div className="btn-back">
             <button className="link bttn" 
@@ -123,7 +123,7 @@ const navigate = useNavigate();
            
            {/* bang size */}
             <table>
-                <thead>
+                <thead style={{backgroundColor: "#00bcd4"}}>
                 <tr>
                     <th>Size</th>
                     <th>Số lượng</th>
@@ -138,7 +138,6 @@ const navigate = useNavigate();
                 }
                 </tbody>
             </table>
-            <div className="line"></div>
 
           </div>
         </div>
@@ -184,7 +183,7 @@ const Product_Size = ({ps} : props) => {
           />
         </td>
         <td>
-            <button onClick={() => update_quantity_ProductSize()}>Update</button>
+            <button className='bttn' style={{backgroundColor: "#ffc107"}} onClick={() => update_quantity_ProductSize()}>Update</button>
         </td>
       </tr>
     )

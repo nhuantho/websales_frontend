@@ -41,7 +41,7 @@ export default ({setUploadImage}) => {
           setImageUpload(event.target.files[0]);
         }}
       />
-      <button style={{marginTop: "10px", width: "100%"}} className="bttn" onClick={uploadFile}> Upload Image</button>
+      <button style={{marginTop: "10px", width: "100%",backgroundColor: "#ffc107"}} className="bttn" onClick={uploadFile}> Upload Image</button>
     </div>
   );
 }
