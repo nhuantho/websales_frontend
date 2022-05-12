@@ -63,6 +63,8 @@ type appContext = {
   setUser: (c: user) => void;
   u: user[];
   setU: (c: user[]) => void;
+  promotion : number;
+  setPromotion: (c: number) => void;
 };
 
 export const AppContact = createContext<appContext>({
@@ -71,7 +73,9 @@ export const AppContact = createContext<appContext>({
   user: {} as user,
   setUser: () => {},
   u: [],
-  setU: () => {}
+  setU: () => {},
+  promotion:  0,
+  setPromotion: () => {},
 });
 
 export const useAppContext = () => useContext(AppContact);
@@ -79,9 +83,10 @@ export default () => {
   const [idP, setIdP] = useState<number>(0);
   const [user, setUser] = useState<user>(testUser as user);
   const [u, setU] = useState<user[]>([])
+  const [promotion, setPromotion] = useState<number>(10);
   console.log(user);
   return (
-    <AppContact.Provider value={{ idP, setIdP, user, setUser, u, setU }}>
+    <AppContact.Provider value={{ idP, setIdP, user, setUser, u, setU, promotion, setPromotion }}>
       <Router>
         <div>
           <Navbar fixed="top" bg="dark" variant="dark" expand="lg">

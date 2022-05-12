@@ -90,6 +90,7 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const { user, setUser } = useAppContext();
+  const {promotion, setPromotion} = useAppContext();
   const [carts, setCarts] = useState<CartProduct[]>([]);
   // const [billId, setBillId] = useState(0);
 
@@ -111,6 +112,8 @@ export default function Payment() {
   for (let i = 0; i < carts.length; i++) {
     Total += carts[i].product.price * carts[i].quatity
   }
+  //  check khuyen mai
+  if(Total >= 1000000) Total= Total*(100-promotion)/100;
   //=================================================================
   const [modalBank, setModaBank] = useState(true)
   const [bank, setBank] = useState("VCB")
@@ -246,6 +249,10 @@ export default function Payment() {
           <h3>Họ và tên: {user.fullname}</h3>
           <p>Địa chỉ: {user.address}</p>
           <p>Số điện thoại: {user.phone}</p>
+          <p >
+            <span style={{backgroundColor: "yellow", fontSize: 20, fontStyle: 'italic'}}>Khuyến Mãi Sốc:</span>  
+            <span style={{fontWeight: "bold"}}> Giảm {promotion} % cho đơn hàng từ 1 triệu đồng </span>
+          </p>
         </div>
         <div className='payment-table'>
           <table>
