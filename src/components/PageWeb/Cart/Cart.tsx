@@ -62,14 +62,15 @@ export default () => {
         console.log(err);
       });
   };
-  const DeleteCart = () => {
+  const DeleteCart = (cartId : Number) => {
     axios({
     method: "delete",
-    url: `http://localhost:9191/deleteCart/${idC}`,
+    url: "http://localhost:9191/deleteCart/" + cartId,
     data: null
   })
     .then((res) => {
         alert("Đã xóa khỏi giỏ hàng")
+        getAPI();
     })
     .catch((err) => {
       console.log(err);
@@ -175,7 +176,7 @@ export default () => {
                         <td className="text-right font-weight-semibold align-middle p-4">{StylePrice(Price_SaleOf(cart.product.model,cart.product.price))}Đ</td>
                         <td className="align-middle p-4"><input type="number" className="form-control text-center" value={cart.quatity}></input></td>
                         <td className="text-right font-weight-semibold align-middle p-4">{StylePrice(Price_SaleOf(cart.product.model,cart.product.price) * cart.quatity)}Đ</td>
-                        <td className="text-center align-middle px-0"><a className="btn-remove shop-tooltip close float-none text-danger" title="" data-original-title="Remove" onClick={() => (setIdC(cart.id), DeleteCart())}>×</a></td>
+                        <td className="text-center align-middle px-0"><button className="btn-remove shop-tooltip close float-none text-danger"  onClick={() => (DeleteCart(cart.id))}>×</button></td>
                       </tr>
                     )
                   }
