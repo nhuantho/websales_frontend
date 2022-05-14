@@ -44,18 +44,24 @@ export default () => {
       });
   };
   const login = () => {
-    let check = false;
-    users.forEach((u) => {
-      if (username === u.username && password === u.password) {
-        setUser(u);
-        console.log(u);
-        check = true;
-      }
-    })
-    if(check){
-      return true;
-    } 
-    return false;
+    
+    if(username == "" || password == ""){
+      alert("Khong duoc de trang")
+    } else {
+      let check = false;
+      users.forEach((u) => {
+        if (username === u.username && password === u.password) {
+          setUser(u);
+          console.log(u);
+          check = true;
+        }
+      })
+      if(check){
+        return true;
+      } 
+      alert("Sai thong tin dang nhap")
+      return false;
+    }
   };
 
   console.log(users);
