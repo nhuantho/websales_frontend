@@ -90,7 +90,7 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const { user, setUser } = useAppContext();
-  const {promotion, setPromotion} = useAppContext();
+
   const [carts, setCarts] = useState<CartProduct[]>([]);
   // const [billId, setBillId] = useState(0);
 
@@ -107,16 +107,45 @@ export default function Payment() {
   var date = showDate.getDate() + "/" + (showDate.getMonth() + 1) + "/" + showDate.getFullYear();
   var dateTime = showDate.getHours() + ":" + showDate.getMinutes() + ":" + showDate.getSeconds();
 
+  //=========================================
+  // giam gia
+  const {saleOf_Shirt, setSaleOf_Shirt}= useAppContext();
+  const {saleOf_Shoes, setSaleOf_Shoes}= useAppContext();
+  const {saleOf_Watch, setSaleOf_Watch}= useAppContext();
+
+  const checkSale = (model: String) => {
+    if(model == "Áo")
+      return saleOf_Shirt+"%";
+    if(model == "Giày")
+      return saleOf_Shoes+"%";
+    if(model == "Đồng hồ")
+      return saleOf_Watch+"%";
+  }
+  const Price_SaleOf = (model: String, price: number) => {
+    if(model == "Áo")
+      return price * (100 - saleOf_Shirt) / 100;
+    if(model == "Giày")
+      return price * (100 - saleOf_Shoes) / 100;
+    if(model == "Đồng hồ")
+      return price * (100 - saleOf_Watch) / 100;
+    return price;
+  }
+
+  //=================================================================
+  const {promotion, setPromotion} = useAppContext();
+
   // Tính tổng tiền
   var Total = 0;
   for( let i = 0; i < carts.length; i++){
-    Total += carts[i].product.price * carts[i].quatity
+    Total += Price_SaleOf(carts[i].product.model ,carts[i].product.price) * carts[i].quatity
   }
   var discountMoney = 0;
   if( Total > 1000000) {
     discountMoney = Total * promotion / 100;
     Total -= discountMoney;
   }
+  
+
   //=================================================================
   const [modalBank, setModaBank] = useState(true)
   const [bank, setBank] = useState("VCB")
@@ -173,7 +202,7 @@ export default function Payment() {
         "bill_id": billId,
         "product_id": product_id,
         "quatity": quatity,
-        "unitPrice": Total,
+        "unitPrice": unitPrice,
       },
     })
       .then((res) => { })
@@ -182,7 +211,7 @@ export default function Payment() {
 
   const AddManyBillProduct = (id: number) => {
     for (let i = 0; i < carts.length; i++) {
-      AddBillProduct(id, carts[i].product_id, carts[i].quatity, Total)
+      AddBillProduct(id, carts[i].product_id, carts[i].quatity, Price_SaleOf(carts[i].product.model ,carts[i].product.price) * carts[i].quatity )
       get_ProductSize(carts[i].product_id, carts[i].size_id, carts[i].quatity);
     }
     DeleteAllCartByClientId();
@@ -349,17 +378,61 @@ type props = {
 }
 
 // hien thong tin san pham trong hooa don
-const ProductInCart = ({ cart, index }: props) => (
-  <tr>
-    <td>{index + 1}</td>
-    <td>
-      <img src={cart.product.image} className="cartImage" />
-    </td>
-    <td>{cart.product.nameProduct}</td>
-    <td>{cart.product.price}</td>
-    <td>{cart.quatity}</td>
-    <td>{cart.product.model}</td>
-    <td>{cart.product.price * cart.quatity}</td>
-    <td>{cart.product.color}</td>
-  </tr>
-)
+// const ProductInCart = ({ cart, index }: props) => (
+  // <tr>
+  //   <td>{index + 1}</td>
+  //   <td>
+  //     <img src={cart.product.image} className="cartImage" />
+  //   </td>
+  //   <td>{cart.product.nameProduct}</td>
+  //   <td>{cart.product.price}</td>
+  //   <td>{cart.quatity}</td>
+  //   <td>{cart.product.model}</td>
+  //   <td>{cart.product.price * cart.quatity}</td>
+  //   <td>{cart.product.color}</td>
+  // </tr>
+// )
+
+const ProductInCart = ({ cart, index }: props) => {
+  // giam gia
+  const {saleOf_Shirt, setSaleOf_Shirt}= useAppContext();
+  const {saleOf_Shoes, setSaleOf_Shoes}= useAppContext();
+  const {saleOf_Watch, setSaleOf_Watch}= useAppContext();
+
+  const Price_SaleOf = (model: String, price: number) => {
+    if(model == "Áo")
+      return price * (100 - saleOf_Shirt) / 100;
+    if(model == "Giày")
+      return price * (100 - saleOf_Shoes) / 100;
+    if(model == "Đồng hồ")
+      return price * (100 - saleOf_Watch) / 100;
+    return price;
+  }
+  const StylePrice = (price : number) => {
+    let num = price+""
+    let s = "";
+    for( let i = 0; i < num.length; i++)
+    {
+      s = num[num.length -1 - i ] + s;
+
+      if((i+1) % 3 ==0 && i != (num.length-1) ) {
+        s = "." + s;
+      }
+    }
+    return s;
+  }
+  return (
+    <tr>
+      <td>{index + 1}</td>
+      <td>
+        <img src={cart.product.image} className="cartImage" />
+      </td>
+      <td>{cart.product.nameProduct}</td>
+      <td>{StylePrice(Price_SaleOf(cart.product.model,cart.product.price))}đ</td>
+      <td>{cart.quatity}</td>
+      <td>{cart.product.model}</td>
+      <td>{StylePrice(Price_SaleOf(cart.product.model,cart.product.price) * cart.quatity)}đ</td>
+      <td>{cart.product.color}</td>
+    </tr>
+  )
+}

@@ -114,19 +114,19 @@ export default () => {
         </div>
         <h1 className="h1-st2">Bảng sản phẩm:  ({products.length} sản phẩm)</h1>
         <div className="table-product">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Tên sản phẩm</th>
-                <th>Loại</th>
-                <th>Giá</th>
-                <th>Mô tả</th>
-                <th>Màu</th>
-                <th>Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Loại</th>
+                  <th>Giá</th>
+                  <th>Mô tả</th>
+                  <th>Màu</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
               {
                 isUpdate ?
                   <>

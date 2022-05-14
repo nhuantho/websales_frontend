@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { StringDecoder } from "string_decoder";
 import { useAppContext } from "../../Navbar/Navbar";
 import Footer from "../Store/Footer";
 import "./Cart.css";
@@ -61,27 +62,66 @@ export default () => {
         console.log(err);
       });
   };
-  const DeleteCart = () => {
+  const DeleteCart = (cartId : Number) => {
     axios({
     method: "delete",
-    url: `http://localhost:9191/deleteCart/${idC}`,
+    url: "http://localhost:9191/deleteCart/" + cartId,
     data: null
   })
     .then((res) => {
         alert("Đã xóa khỏi giỏ hàng")
+        getAPI();
     })
     .catch((err) => {
       console.log(err);
     });
   }
   
+  //======================================================================
+  const StylePrice = (price : number) => {
+    let num = price+""
+    let s = "";
+    for( let i = 0; i < num.length; i++)
+    {
+      s = num[num.length -1 - i ] + s;
+
+      if((i+1) % 3 ==0 && i != (num.length-1) ) {
+        s = "." + s;
+      }
+    }
+    return s;
+  }
+//=========================================
+  // giam gia
+  const {saleOf_Shirt, setSaleOf_Shirt}= useAppContext();
+  const {saleOf_Shoes, setSaleOf_Shoes}= useAppContext();
+  const {saleOf_Watch, setSaleOf_Watch}= useAppContext();
+
+  const checkSale = (model: String) => {
+    if(model == "Áo")
+      return saleOf_Shirt+"%";
+    if(model == "Giày")
+      return saleOf_Shoes+"%";
+    if(model == "Đồng hồ")
+      return saleOf_Watch+"%";
+  }
+  const Price_SaleOf = (model: String, price: number) => {
+    if(model == "Áo")
+      return price * (100 - saleOf_Shirt) / 100;
+    if(model == "Giày")
+      return price * (100 - saleOf_Shoes) / 100;
+    if(model == "Đồng hồ")
+      return price * (100 - saleOf_Watch) / 100;
+    return price;
+  }
+
   //=================================================================
   const {promotion, setPromotion} = useAppContext();
 
   // Tính tổng tiền
   var Total = 0;
   for( let i = 0; i < carts.length; i++){
-    Total += carts[i].product.price * carts[i].quatity
+    Total += Price_SaleOf(carts[i].product.model ,carts[i].product.price) * carts[i].quatity
   }
   var discountMoney = 0;
   if( Total > 1000000) {
@@ -90,7 +130,6 @@ export default () => {
   }
   
 
-  //======================================================================
   return (
     <>
     <div className="container px-3 my-5 clearfix">
@@ -134,10 +173,10 @@ export default () => {
                             </div>
                           </div>
                         </td>
-                        <td className="text-right font-weight-semibold align-middle p-4">{cart.product.price}Đ</td>
+                        <td className="text-right font-weight-semibold align-middle p-4">{StylePrice(Price_SaleOf(cart.product.model,cart.product.price))}Đ</td>
                         <td className="align-middle p-4"><input type="number" className="form-control text-center" value={cart.quatity}></input></td>
-                        <td className="text-right font-weight-semibold align-middle p-4">{cart.product.price * cart.quatity}Đ</td>
-                        <td className="text-center align-middle px-0"><a className="btn-remove shop-tooltip close float-none text-danger" title="" data-original-title="Remove" onClick={() => (setIdC(cart.id), DeleteCart())}>×</a></td>
+                        <td className="text-right font-weight-semibold align-middle p-4">{StylePrice(Price_SaleOf(cart.product.model,cart.product.price) * cart.quatity)}Đ</td>
+                        <td className="text-center align-middle px-0"><button className="btn-remove shop-tooltip close float-none text-danger"  onClick={() => (DeleteCart(cart.id))}>×</button></td>
                       </tr>
                     )
                   }
@@ -155,11 +194,11 @@ export default () => {
               <div className="d-flex total-payment">
                 <div className="text-right mt-4 mr-8">
                   <label className="text-muted font-weight-normal m-0">Giảm giá</label>
-                  <div className="text-large"><strong>{discountMoney}</strong></div><br></br>
+                  <div className="text-large"><strong>{StylePrice(discountMoney)}Đ</strong></div><br></br>
                 </div>
                 <div className="text-right mt-4">
                   <label className="text-muted font-weight-normal m-0">Tổng giá</label>
-                  <div className="text-large"><strong>{Total}Đ</strong></div>
+                  <div className="text-large"><strong>{StylePrice(Total)}Đ</strong></div>
                 </div>
               </div>
             </div>
@@ -178,3 +217,36 @@ export default () => {
   );
 };
 
+type TypeOf_Cart = {
+  id: number,
+  client_id: number,
+  "user": {
+      id: number,
+      fullname: String,
+      dob: String,
+      gender: String,
+      phone: String,
+      address: String,
+      username: String,
+      password: String,
+      isAdmin: number,
+      note: ""
+  },
+  product_id: number,
+  product: {
+      id: number,
+      nameProduct: String,
+      model: String,
+      image: String,
+      price: number,
+      describes: String,
+      color: String
+  },
+  size_id: number,
+  size: {
+    id: number,
+    size: String
+  },
+  extraDate: String,
+  quatity: number
+}

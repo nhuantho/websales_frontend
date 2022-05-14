@@ -46,6 +46,31 @@ export default function ProductItem({
     }
     return s;
   }
+  //=========================================
+  // giam gia
+  const {promotion, setPromotion} =useAppContext();
+  const {saleOf_Shirt, setSaleOf_Shirt}= useAppContext();
+  const {saleOf_Shoes, setSaleOf_Shoes}= useAppContext();
+  const {saleOf_Watch, setSaleOf_Watch}= useAppContext();
+
+  const checkSale = () => {
+    if(model == "Áo")
+      return saleOf_Shirt+"%";
+    if(model == "Giày")
+      return saleOf_Shoes+"%";
+    if(model == "Đồng hồ")
+      return saleOf_Watch+"%";
+  }
+  const Price_SaleOf = () => {
+    if(model == "Áo")
+      return price * (100 - saleOf_Shirt) / 100;
+    if(model == "Giày")
+      return price * (100 - saleOf_Shoes) / 100;
+    if(model == "Đồng hồ")
+      return price * (100 - saleOf_Watch) / 100;
+    return price;
+  }
+
   return (
     <Button id="item" onClick={togg}>
       <div className="container">
@@ -58,7 +83,19 @@ export default function ProductItem({
           </a>
         </div>
         <div className="price">
-          <div>{StylePrice(price)}<span>đ</span></div>
+          <div style={{fontSize: 15, color: 'black'}}>Giảm {checkSale()}</div>
+          <div>
+            <span style={{fontSize: 15, color: 'black'}}>Giá: </span>
+              {StylePrice(Price_SaleOf())}
+            <span>đ</span>
+          </div>
+
+          <div style={{color: "gray", fontSize: 15, fontStyle: "italic"}}>
+            <span>Giá gốc: </span>
+            {StylePrice(price)}
+            <span>đ</span>
+          </div>
+
         </div>
       </div>
     </Button>
