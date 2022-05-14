@@ -29,6 +29,7 @@ import "./Navbar.css";
 import Payment from "../PageWeb/Payment/Payment";
 import PayDone from "../PageWeb/Payment/PayDone";
 import ProductSizeDetail from "../Admin/Container/ProductSizeDetail";
+import CommingProductDetails from "../PageWeb/Products/CommingProductDetails"
 
 type user = {
   id: number;
@@ -71,6 +72,8 @@ type appContext = {
   setSaleOf_Shoes: (c: number) => void;
   saleOf_Watch : number;
   setSaleOf_Watch: (c: number) => void;
+  idBill : number;
+  setIdBill: (c: number) => void;
 };
 
 export const AppContact = createContext<appContext>({
@@ -90,7 +93,9 @@ export const AppContact = createContext<appContext>({
   setSaleOf_Shoes: () => {},
   saleOf_Watch: 0,
   setSaleOf_Watch: () => {},
-  
+
+  idBill : 0,
+  setIdBill : () => {},
 
 });
 
@@ -99,6 +104,7 @@ export default () => {
   const [idP, setIdP] = useState<number>(0);
   const [user, setUser] = useState<user>(testUser as user);
   const [u, setU] = useState<user[]>([])
+  const [idBill,setIdBill] = useState<number>(0);
 
   const [promotion, setPromotion] = useState<number>(10);
   const [saleOf_Shirt, setSaleOf_Shirt]= useState<number>(5);
@@ -106,7 +112,7 @@ export default () => {
   const [saleOf_Watch, setSaleOf_Watch]= useState<number>(15);
 
   return (
-    <AppContact.Provider value={{ idP, setIdP, user, setUser, u, setU, promotion, setPromotion, saleOf_Shirt, setSaleOf_Shirt, saleOf_Shoes, setSaleOf_Shoes, saleOf_Watch, setSaleOf_Watch }}>
+    <AppContact.Provider value={{ idP, setIdP, user, setUser, u, setU, promotion, setPromotion, saleOf_Shirt, setSaleOf_Shirt, saleOf_Shoes, setSaleOf_Shoes, saleOf_Watch, setSaleOf_Watch,idBill, setIdBill }}>
       <Router>
         <div>
           <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
@@ -177,6 +183,7 @@ export default () => {
             <Route path="/" element={<Home />} />
             <Route path="/product" element={<Products />} />
             <Route path="/product/details" element={<ProductDetails />} />
+            <Route path="/product/comming_details" element={ <CommingProductDetails /> } />
             <Route path="/store" element={<Store />} />
             <Route path="/Cart" element={<Cart />} />
             <Route path="/signin" element={<Signin />} />
