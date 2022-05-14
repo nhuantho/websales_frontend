@@ -6,43 +6,43 @@ import { useAppContext } from "../../Navbar/Navbar";
 import Footer from "../Store/Footer";
 import "./Cart.css";
 
-const Cart = {
-  "id": 1,
-  "client_id": 2,
-  "user": {
-      "id": 2,
-      "fullname": "Bùi Cảnh Nhuận",
-      "dob": "20/07/2001",
-      "gender": "Nam",
-      "phone": "0329689087",
-      "address": "Phú Thọ",
-      "username": "nhuan1",
-      "password": "12345",
-      "isAdmin": 0,
-      "note": ""
-  },
-  "product_id": 10,
-  "product": {
-      "id": 10,
-      "nameProduct": "Áo thun đen có hình",
-      "model": "Áo",
-      "image": "https://firebasestorage.googleapis.com/v0/b/test-62604.appspot.com/o/img10.jpg?alt=media&token=5ed15472-a5c4-402e-b0a7-ee38f0351fc2",
-      "price": 200000,
-      "describes": "Chất liệu vải mềm, mặc thoải mái",
-      "color": "Trắng"
-  },
-  "size_id": 3,
-  "size": {
-    "id": 3,
-    "size": "L"
-  },
-  "extraDate": "5/5/2022",
-  "quatity": 2
-}
 
+type TypeOf_Cart = {
+  id: number,
+  client_id: number,
+  user: {
+      id: number,
+      fullname: String,
+      dob: String,
+      gender: String,
+      phone: String,
+      address: String,
+      username: String,
+      password: String,
+      isAdmin: number,
+      note: String,
+  },
+  product_id: number,
+  product: {
+      id: number,
+      nameProduct: String,
+      model: String,
+      image: String,
+      price: number,
+      describes: String,
+      color: String,
+  },
+  size_id: number,
+  size: {
+    id: number,
+    size: String
+  },
+  extraDate: String,
+  quatity: number,
+}
 export default () => {
   const navigate = useNavigate();
-  const [carts, setCarts] = useState([Cart])
+  const [carts, setCarts] = useState<TypeOf_Cart[]>([])
   const { user, setUser } = useAppContext();
   const [idC, setIdC] = useState(0);
   useEffect(() => {
@@ -62,10 +62,10 @@ export default () => {
         console.log(err);
       });
   };
-  const DeleteCart = (cartId : Number) => {
+  const DeleteCartById = (Id : Number) => {
     axios({
     method: "delete",
-    url: "http://localhost:9191/deleteCart/" + cartId,
+    url: "http://localhost:9191/deleteCart/" + Id,
     data: null
   })
     .then((res) => {
@@ -161,7 +161,7 @@ export default () => {
                       <tr>
                         <td className="p-4">
                           <div className="media align-items-center">
-                            <img src={cart.product.image} className="d-block ui-w-40 ui-bordered mr-4" alt=""></img>
+                            <img src={String(cart.product.image)} className="d-block ui-w-40 ui-bordered mr-4" />
                             <div className="media-body">
                               <a href="#" className="d-block text-dark">{cart.product.nameProduct}</a>
                               <small>
@@ -176,7 +176,7 @@ export default () => {
                         <td className="text-right font-weight-semibold align-middle p-4">{StylePrice(Price_SaleOf(cart.product.model,cart.product.price))}Đ</td>
                         <td className="align-middle p-4"><input type="number" className="form-control text-center" value={cart.quatity}></input></td>
                         <td className="text-right font-weight-semibold align-middle p-4">{StylePrice(Price_SaleOf(cart.product.model,cart.product.price) * cart.quatity)}Đ</td>
-                        <td className="text-center align-middle px-0"><button className="btn-remove shop-tooltip close float-none text-danger"  onClick={() => (DeleteCart(cart.id))}>×</button></td>
+                        <td className="text-center align-middle px-0"><button className="btn-remove shop-tooltip close float-none text-danger"  onClick={() => (DeleteCartById (cart.id))}>×</button></td>
                       </tr>
                     )
                   }
@@ -217,36 +217,3 @@ export default () => {
   );
 };
 
-type TypeOf_Cart = {
-  id: number,
-  client_id: number,
-  "user": {
-      id: number,
-      fullname: String,
-      dob: String,
-      gender: String,
-      phone: String,
-      address: String,
-      username: String,
-      password: String,
-      isAdmin: number,
-      note: ""
-  },
-  product_id: number,
-  product: {
-      id: number,
-      nameProduct: String,
-      model: String,
-      image: String,
-      price: number,
-      describes: String,
-      color: String
-  },
-  size_id: number,
-  size: {
-    id: number,
-    size: String
-  },
-  extraDate: String,
-  quatity: number
-}

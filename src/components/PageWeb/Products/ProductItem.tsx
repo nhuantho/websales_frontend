@@ -70,6 +70,13 @@ export default function ProductItem({
       return price * (100 - saleOf_Watch) / 100;
     return price;
   }
+  //
+  const check_hang_moi = () => {
+    if(id >= 40)
+      return "Hàng mới về"
+    else
+      return ""
+  }
 
   return (
     <Button id="item" onClick={togg}>
@@ -95,7 +102,7 @@ export default function ProductItem({
             {StylePrice(price)}
             <span>đ</span>
           </div>
-
+          <div>{check_hang_moi()}</div>
         </div>
       </div>
     </Button>
