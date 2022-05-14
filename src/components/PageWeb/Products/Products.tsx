@@ -6,6 +6,7 @@ import ProductItem from "./ProductItem";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Store/Footer";
 import { Alert } from "react-bootstrap";
+import { useAppContext } from "../../Navbar/Navbar";
 
 
 
@@ -121,6 +122,11 @@ export default () => {
   // ==================================================
   // tim kiem
   const [search, setSearch] = useState("")
+  // giam gia
+  const {promotion, setPromotion} =useAppContext();
+  const {saleOf_Shirt, setSaleOf_Shirt}= useAppContext();
+  const {saleOf_Shoes, setSaleOf_Shoes}= useAppContext();
+  const {saleOf_Watch, setSaleOf_Watch}= useAppContext();
 
   return (
     <>
