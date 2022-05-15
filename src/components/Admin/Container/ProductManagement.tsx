@@ -70,6 +70,7 @@ export default () => {
     deleteByProductID(id, "http://localhost:9191/deleteProductSizeByProductId/")
     deleteByProductID(id, "http://localhost:9191/deleteCartByProductId/")
     deleteByProductID(id, "http://localhost:9191/deleteBillProductByProductId/")
+    deleteByProductID(id, "http://localhost:9191/deleteCommentByProductId/")
     getApi();
   }
   

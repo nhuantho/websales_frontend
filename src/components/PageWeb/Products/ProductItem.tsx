@@ -72,7 +72,7 @@ export default function ProductItem({
   }
   //
   const check_hang_moi = () => {
-    if(id >= 40)
+    if(id >= 40 && id <= 60)
       return "Hàng mới về"
     else
       return ""

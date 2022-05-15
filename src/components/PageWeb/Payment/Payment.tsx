@@ -90,6 +90,7 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const { user, setUser } = useAppContext();
+  const { idBill, setIdBill } = useAppContext();
 
   const [carts, setCarts] = useState<CartProduct[]>([]);
   // const [billId, setBillId] = useState(0);
@@ -189,6 +190,7 @@ export default function Payment() {
       },
     })
       .then((res) => {
+        setIdBill(res.data.id)
         AddManyBillProduct(res.data.id)
       })
       .catch((err) => { console.log(err); });

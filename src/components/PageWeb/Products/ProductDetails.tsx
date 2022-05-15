@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../Navbar/Navbar";
 import axios from "axios";
 import Footer from "../Store/Footer";
+import CommingProductDetails from "./CommingProductDetails"
 
 const test = [{
   "id": 1,
@@ -48,15 +49,12 @@ export default function ProductDetails() {
   var curMonth = curDate.getMonth() + 1;
   var curYear = curDate.getFullYear();
   const [quantity, setQuantity] = useState(1);
-  const [love, setLove] = useState(false);
   const navigate = useNavigate();
   const { idP, setIdP, user, setUser } = useAppContext();
   const [productSize, setProductSize] = useState(test);
   const [idS, setIdS] = useState(0);
   const [q, setQ] = useState(-1);
-  console.log(idP);
-  console.log(idS);
-  console.log(q);
+  
 
   const [selectSize, setSelectSize] = useState("no_color")
 
@@ -152,7 +150,10 @@ export default function ProductDetails() {
   }
   return (
     <>
-    <div>
+    {
+      productSize.length !== 0 ?
+      <>
+      <div>
       {/* header */}
       
 
@@ -220,41 +221,108 @@ export default function ProductDetails() {
             </div>
 
             <div className="line"></div>
-
-            <div className="contact">
-              <button className="wishlist" onClick={() => setLove(!love)}>
-                {love == false ? (
-                  <AiOutlineHeart size={20} />
-                ) : (
-                  <AiFillHeart size={20} />
-                )}
-                <span className="textWishlist">Add to wishlist</span>
-              </button>
-
-              <div className="boxIcon">
-                <div className="footerIcon">Share:</div>
-                <div className="footerIcon">
-                  <FaFacebook size={18} />
-                </div>
-                <div className="footerIcon">
-                  <FaInstagram size={18} />
-                </div>
-                <div className="footerIcon">
-                  <FaInvision size={18} />
-                </div>
-                <div className="footerIcon">
-                  <FaPinterest size={18} />
-                </div>
-                <div className="footerIcon">
-                  <FaTiktok size={18} />
-                </div>
-              </div>
-            </div>
+            <Contact />
+           
           </div>
         </div>
       </div>
     </div>
+      </>
+      :
+      <>
+      <CommingProductDetails />
+      </>
+    }
+    <Comment />
     <Footer/>
     </>
   );
+}
+
+const Contact = () => {
+  const [love, setLove] = useState(false);
+  return (
+    <div className="contact">
+    <button className="wishlist" onClick={() => setLove(!love)}>
+      {love == false ? (
+        <AiOutlineHeart size={20} />
+      ) : (
+        <AiFillHeart size={20} />
+      )}
+      <span className="textWishlist">Add to wishlist</span>
+    </button>
+
+    <div className="boxIcon">
+      <div className="footerIcon">Share:</div>
+      <div className="footerIcon">
+        <FaFacebook size={18} />
+      </div>
+      <div className="footerIcon">
+        <FaInstagram size={18} />
+      </div>
+      <div className="footerIcon">
+        <FaInvision size={18} />
+      </div>
+      <div className="footerIcon">
+        <FaPinterest size={18} />
+      </div>
+      <div className="footerIcon">
+        <FaTiktok size={18} />
+      </div>
+    </div>
+  </div>
+  )
+}
+
+type typeOf_comment = {
+  id: Number,
+  product_id: Number,
+  product: {
+      id: Number,
+      nameProduct: String,
+      model: String,
+      image: String,
+      price: Number,
+      describes: String,
+      color: String
+  },
+  star: Number,
+  comment: String,
+  name: String,
+}
+
+const Comment = () => {
+  const [comment, setComment] = useState<typeOf_comment[]>([]);
+  const { idP, setIdP, user, setUser } = useAppContext();
+
+  useEffect(() => {
+    getBillProduct();
+  }, []);
+
+  const getBillProduct = () => {
+    axios({
+      method: "get",
+      url: `http://localhost:9191/commentByProductId/${idP}`,
+      data: null,
+    })
+      .then((res) => {
+        setComment(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };  
+  return (
+    <div>
+      <h4>Đánh giá sản phẩm</h4>
+      {
+        comment.map(cmt => (
+          <div>
+            <span>{cmt.name} - {cmt.star+""}/5 sao :</span>
+            <div>{cmt.comment}: </div>
+          </div>
+        ))
+      }
+    </div>
+  )
 }
