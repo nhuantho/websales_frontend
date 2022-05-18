@@ -9,13 +9,14 @@ import {
   Form,
   FormControl,
   Button,
+  Alert,
 } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Admin from "../Admin/Admin";
 import ProductManagement from "../Admin/Container/ProductManagement";
 import ProductSales from "../Admin/Container/ProductSales";
 import RevenueByCustomer from "../Admin/Container/RevenueByCustomer";
-import RevenueOverTime from "../Admin/Container/RevenueOverTime";
+import PromotionManagement from "../Admin/Container/PromotionManagement";
 import Cart from "../PageWeb/Cart/Cart";
 import Home from "../PageWeb/Home/Home";
 import ProductDetails from "../PageWeb/Products/ProductDetails";
@@ -99,6 +100,12 @@ export const AppContact = createContext<appContext>({
 
 });
 
+type  typeOf_Sale = [{
+  id: Number,
+  model: String,
+  sale: Number,
+}]
+
 export const useAppContext = () => useContext(AppContact);
 export default () => {
   const [idP, setIdP] = useState<number>(0);
@@ -106,10 +113,45 @@ export default () => {
   const [u, setU] = useState<user[]>([])
   const [idBill,setIdBill] = useState<number>(0);
 
-  const [promotion, setPromotion] = useState<number>(10);
-  const [saleOf_Shirt, setSaleOf_Shirt]= useState<number>(5);
-  const [saleOf_Shoes, setSaleOf_Shoes]= useState<number>(10);
-  const [saleOf_Watch, setSaleOf_Watch]= useState<number>(15);
+  const [promotion, setPromotion] = useState<number>(0);
+  const [saleOf_Shirt, setSaleOf_Shirt]= useState<number>(0);
+  const [saleOf_Shoes, setSaleOf_Shoes]= useState<number>(0);
+  const [saleOf_Watch, setSaleOf_Watch]= useState<number>(0);
+
+  useEffect(() => {
+    getAPI("http://localhost:9191/sales");
+  }, []);
+
+  const getAPI = (url: string) => {
+    axios({
+      method: "get",
+      url: url,
+      data: null,
+    })
+      .then((res) => {
+        setSale(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  const setSale = (data : typeOf_Sale) => {
+   for(let i = 0; i < data.length; i++){
+     if(data[i].model == "Áo")
+      setSaleOf_Shirt(Number(data[i].sale))
+
+      if(data[i].model == "Giày")
+      setSaleOf_Shoes(Number(data[i].sale))
+
+      if(data[i].model == "Đồng hồ")
+      setSaleOf_Watch(Number(data[i].sale))
+
+      if(data[i].model == "promotion")
+      setPromotion(Number(data[i].sale))
+   }
+      
+  }
 
   return (
     <AppContact.Provider value={{ idP, setIdP, user, setUser, u, setU, promotion, setPromotion, saleOf_Shirt, setSaleOf_Shirt, saleOf_Shoes, setSaleOf_Shoes, saleOf_Watch, setSaleOf_Watch,idBill, setIdBill }}>
@@ -203,8 +245,8 @@ export default () => {
               element={<RevenueByCustomer />}
             />
             <Route
-              path="/admin/revenueovertime"
-              element={<RevenueOverTime />}
+              path="/admin/promotionmanagement"
+              element={<PromotionManagement />}
             />
             <Route path="/payment" element={<Payment />} />
             <Route path="/payment/payDone" element={<PayDone />} />

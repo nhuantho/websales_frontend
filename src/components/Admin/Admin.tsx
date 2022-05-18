@@ -24,7 +24,7 @@ export default () => {
             Thống kê doanh thu theo khách hàng
           </ListGroup.Item>
         </button>
-        <button className="btn-admin" onClick={() => navigate("revenueovertime")}>
+        <button className="btn-admin" onClick={() => navigate("promotionmanagement")}>
           <ListGroup.Item variant="success">
             Quản lí chương trình khuyến mãi, giảm giá
           </ListGroup.Item>
