@@ -76,8 +76,10 @@ export default function PayDone() {
       {
         billProduct.map(bs => (
           <>
-            <ShowProduct  bs={bs}/>
-            <Comment product_id={bs.product_id} />
+            <div className="billProduct">
+              <ShowProduct  bs={bs}/>
+              <Comment product_id={bs.product_id} />
+            </div>
           </>
         ))
       }
@@ -91,8 +93,8 @@ type props_ShowProduct = {
 const ShowProduct = ({bs} : props_ShowProduct) => {
 
   return (
-    <tr>
-      <td className="p-4">
+    <div>
+      <div className="p-4">
         <div className="media align-items-center">
           <img src={String(bs.product.image)} className="d-block ui-w-40 ui-bordered mr-4" />
           <div className="media-body">
@@ -104,8 +106,8 @@ const ShowProduct = ({bs} : props_ShowProduct) => {
             </small>
           </div>
         </div>
-      </td>
-    </tr>
+      </div>
+    </div>
   )
 }
 
@@ -146,21 +148,23 @@ const Comment = ({product_id} : props_Comment) => {
     }
   return (
     <>
-      <span>Đánh giá sao:</span>
-      <input
-        className="input-signin"
-        placeholder="5"
-        onChange={(e) => setStar(Number(e.target.value))}
-      />
+      <div className="billReview">
+        <span>Đánh giá sao:</span>
+        <input
+          className="review-rating"
+          placeholder="5"
+          onChange={(e) => setStar(Number(e.target.value))}
+        />
 
-      <span>Đánh giá sản phẩm:</span>
-      <input
-        className="input-signin"
-        placeholder="Sap pham tuyet voi"
-        onChange={(e) => setComment(e.target.value)}
-      />
+        <span>Đánh giá sản phẩm:</span>
+        <input
+          className="review-rating"
+          placeholder="Sap pham tuyet voi"
+          onChange={(e) => setComment(e.target.value)}
+        />
 
-      <button style={{opacity:checkColor()}} onClick={() => {
+      </div>
+      <button className="btn btn-lg btn-default md-btn-flat mt-2 mr-3 btn-color-yellow"style={{opacity:checkColor()}} onClick={() => {
         if(check){
           addComment()
           setCheck(false)

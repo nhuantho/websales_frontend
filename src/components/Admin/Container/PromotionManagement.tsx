@@ -60,8 +60,8 @@ export default () => {
       });
   };
   return (
-    <div style={{marginTop: 100}}>
-      <h1>Quản lí khuyến mại, giảm giá</h1>
+    <div className="container">
+      <h1 className="h1-st1">Quản lí khuyến mại, giảm giá</h1>
       <div>
         <div>
           <span>Khuyến mại chung: {promotion} % </span>

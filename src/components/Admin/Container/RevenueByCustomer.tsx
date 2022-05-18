@@ -58,8 +58,9 @@ export default () => {
   };
   // const SumOf_
   return (
-    <div style={{marginTop: 70}}>
-      <h1>Thống kê doanh thu theo sản phẩm</h1>
+    <div className="container">
+      <h1 className="h1-st1" >Thống kê doanh thu theo sản phẩm</h1>
+      <div className="table-product">
       <table>
             <thead>
               <tr>
@@ -81,6 +82,7 @@ export default () => {
               }
             </tbody>
           </table>
+          </div>
     </div>
   );
 };

@@ -86,3 +86,22 @@
     font-size: 16px;
     color: #484848;
 }
+
+.billProduct{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: rgba(0,0,0,.01);
+    border: 1px solid #ddd;
+}
+
+.billReview{
+    padding: 0 20px;
+}
+
+.review-rating{
+    width: 100%;
+}
