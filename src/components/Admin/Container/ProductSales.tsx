@@ -128,10 +128,10 @@ export default () => {
   //===========================================
   return (
     <div className="container">
-      <button style={{ backgroundColor: checkColor("Tất cả") }} onClick={() => setShowModel("Tất cả")}>Tất cả</button>
-      <button style={{ backgroundColor: checkColor("Áo") }} onClick={() => setShowModel("Áo")}>Áo</button>
-      <button style={{ backgroundColor: checkColor("Giày") }} onClick={() => setShowModel("Giày")}>Giày</button>
-      <button style={{ backgroundColor: checkColor("Đồng") }} onClick={() => setShowModel("Đồng hồ")}>Đồng hồ</button>
+      <button className="bttn" style={{marginLeft: 10, marginRight: 10, marginBottom: 10, backgroundColor: checkColor("Tất cả") }} onClick={() => setShowModel("Tất cả")}>Tất cả</button>
+      <button className="bttn" style={{marginLeft: 10, marginRight: 10, marginBottom: 10, backgroundColor: checkColor("Áo") }} onClick={() => setShowModel("Áo")}>Áo</button>
+      <button className="bttn" style={{marginLeft: 10, marginRight: 10, marginBottom: 10, backgroundColor: checkColor("Giày") }} onClick={() => setShowModel("Giày")}>Giày</button>
+      <button className="bttn" style={{marginLeft: 10, marginRight: 10, marginBottom: 10, backgroundColor: checkColor("Đồng") }} onClick={() => setShowModel("Đồng hồ")}>Đồng hồ</button>
 
       <h1 className="h1-st1">Thống kê doanh thu theo sản phẩm</h1>
       <h3>Doanh số bán: {check_doanh_so()} sản phẩm</h3>
