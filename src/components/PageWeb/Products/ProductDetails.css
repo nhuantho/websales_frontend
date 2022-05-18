@@ -221,3 +221,43 @@
 #bodySection-p-detail .footerIcon {
     margin-right: 10px;
 }
+
+.comment{
+    text-align: start;
+    background: #eee;
+    padding: 20px 100px 30px;
+    max-width: 1286px;
+    margin: 0 auto 70px;
+}
+
+.comment-user{
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+.comment-title{
+    padding: 10px 0 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.comment-user .nameUser{
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.comment-user .startsUser{
+    display: flex;
+    gap: 5px;
+    color: #f6de04;
+    margin-bottom: 10px;
+}
+
+.comment-user .descUser{
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 10px;
+}
+

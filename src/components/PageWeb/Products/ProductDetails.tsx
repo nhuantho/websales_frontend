@@ -313,13 +313,14 @@ const Comment = () => {
       });
   };  
   return (
-    <div>
-      <h4>Đánh giá sản phẩm</h4>
+    <div className="comment">
+      <h4 className="comment-title">Đánh giá sản phẩm</h4>
       {
         comment.map(cmt => (
-          <div>
-            <span>{cmt.name} - {cmt.star+""}/5 sao :</span>
-            <div>{cmt.comment}: </div>
+          <div className="comment-user">
+            <span className="nameUser">{cmt.name}</span>
+            <div className="starsUser">{cmt.star+""}/5 sao</div>
+            <p className="descUser">{cmt.comment}</p>
           </div>
         ))
       }
