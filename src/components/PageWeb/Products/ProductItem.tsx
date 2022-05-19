@@ -80,7 +80,7 @@ export default function ProductItem({
 
   return (
     <Button id="item" onClick={togg}>
-      <div className="container">
+      <div className="container-product">
         <div className="image">
         <img src={image} />
         </div>
